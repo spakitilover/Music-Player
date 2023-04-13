@@ -12,7 +12,12 @@ export class MusicService {
   ) {}
 
   async find() {
-    return await this.musicRepo.find();
+    return await this.musicRepo.find({
+      relations: {
+        likes: true,
+        albums: true,
+      },
+    });
   }
 
   async findOne(id: number) {

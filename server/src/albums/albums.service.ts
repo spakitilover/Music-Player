@@ -10,7 +10,11 @@ export class AlbumsService {
   ) {}
 
   find() {
-    return this.albumRepo.find();
+    return this.albumRepo.find({
+      relations: {
+        music: true,
+      },
+    });
   }
 
   async create(name: string) {

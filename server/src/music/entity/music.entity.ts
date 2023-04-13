@@ -1,4 +1,5 @@
 import { Albums } from 'src/albums/entity/albums.entity';
+import { Users } from 'src/users/entity/users.entity';
 import {
   Column,
   Entity,
@@ -6,6 +7,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity()
@@ -18,6 +21,9 @@ export class Music {
 
   @ManyToOne(() => Albums, (albums) => albums.music)
   albums: Albums;
+
+  @ManyToMany(() => Users, (users) => users.likes)
+  likes: Music[];
 
   @CreateDateColumn()
   created_at: Date;

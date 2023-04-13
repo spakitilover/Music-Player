@@ -1,4 +1,5 @@
 import { Albums } from 'src/albums/entity/albums.entity';
+import { Music } from 'src/music/entity/music.entity';
 import {
   Column,
   Entity,
@@ -33,6 +34,10 @@ export class Users {
   @ManyToMany(() => Albums, (albums) => albums.users)
   @JoinTable({ name: 'favorites' })
   favorites: Albums[];
+
+  @ManyToMany(() => Music, (music) => music.likes)
+  @JoinTable({ name: 'likes' })
+  likes: Music[];
 
   @CreateDateColumn()
   created_at: Date;
