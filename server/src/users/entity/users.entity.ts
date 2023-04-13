@@ -21,6 +21,9 @@ export class Users {
   username: string;
 
   @Column()
+  email: string;
+
+  @Column()
   password: string;
 
   @ManyToMany(() => Albums, (albums) => albums.users)

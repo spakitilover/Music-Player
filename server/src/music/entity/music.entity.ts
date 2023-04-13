@@ -14,9 +14,6 @@ export class Music {
   id: number;
 
   @Column()
-  name: string;
-
-  @Column()
   song: string;
 
   @ManyToOne(() => Albums, (albums) => albums.music)

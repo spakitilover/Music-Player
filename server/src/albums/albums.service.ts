@@ -15,7 +15,7 @@ export class AlbumsService {
 
   async create(name: string) {
     const album = await this.albumRepo.create({ name });
-    return album;
+    return this.albumRepo.save(album);
   }
 
   async remove(id: number) {

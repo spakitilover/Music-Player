@@ -11,7 +11,12 @@ export class UsersService {
   constructor(@InjectRepository(Users) private usersRepo: Repository<Users>) {}
 
   find() {
-    return this.usersRepo.find();
+    return this.usersRepo.find({
+      relations: {
+        favorites: true,
+        albums: true,
+      },
+    });
   }
 
   async findOne(id: number) {
