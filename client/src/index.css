@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bubble::after {
+  content: "";
+  border-top-left-radius: 50% 0%;
+  border-top-right-radius: 50% 50%;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  width: 50%;
+  background-color: #f54141;
+  height: 85%;
+}
