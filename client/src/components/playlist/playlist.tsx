@@ -12,7 +12,7 @@ import VolumeUp from "@mui/icons-material/VolumeUp";
 
 const Playlist = () => {
   return (
-    <div className="border-t-[1px] bg-black flex items-center border-rose-500 h-[100px] w-full fixed bottom-0 z-40">
+    <div className="border-t-[1px] bg-black flex items-center border-rose-900 h-[100px] w-full fixed bottom-0 z-40">
       <div className="text-white flex items-center justify-between w-full p-10">
         <div className="flex justify-start items-center  w-[30%]">
           <div className="w-[70px] h-[70px] rounded-md overflow-hidden">

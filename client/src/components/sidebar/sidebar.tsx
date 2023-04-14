@@ -34,10 +34,7 @@ const Sidebar = () => {
           <PersonOutlineOutlined className="text-white" />
           <span className="font-['Poppins'] text-white">Profile</span>
         </div>
-        <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600 hover:text-white duration-200 p-3 rounded-md">
-          <DashboardOutlined className="text-white" />
-          <span className="font-['Poppins'] text-white">Dashboard</span>
-        </div>
+
         <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600  duration-200 p-3 rounded-md">
           <LibraryMusicOutlined className="text-white" />
           <span className="font-['Poppins'] text-white">Albums</span>
@@ -52,3 +49,9 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+/*  <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600 hover:text-white duration-200 p-3 rounded-md">
+          <DashboardOutlined className="text-white" />
+          <span className="font-['Poppins'] text-white">Dashboard</span>
+        </div>
+ */

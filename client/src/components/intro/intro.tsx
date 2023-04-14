@@ -1,10 +1,15 @@
 import React from "react";
+import PlayArrow from "@mui/icons-material/PlayArrow";
+import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 
 const Intro = () => {
   return (
     <div className="p-5 w-full ml-[300px] mt-[100px]">
-      <div className="text-3xl font-['poppins'] text-white p-5">Albums</div>
-      <div className="flex flex-wrap gap-10 justify-center p-5">
+      <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">
+        Albums
+      </div>
+      <div className="flex flex-wrap gap-10  ">
         <div>
           <div className="w-[200px] h-[200px] overflow-hidden rounded-md  ">
             <img
@@ -65,23 +70,11 @@ const Intro = () => {
           <div className="text-white p-3 font-[poppins]">Alan Wolker</div>
         </div>
       </div>
-      <hr className="mb-2 border-rose-600" />
-      <div className="w-[50vw] h-[350px] ">
-        <ul className="flex w-full mb-3">
-          <li className="text-white flex-1">
-            <h2 className=" flex  text-slate-500 text-sm">Songs</h2>
-          </li>
-          <li className="text-white flex-1 ">
-            {" "}
-            <h2 className=" text-slate-500 font-[poppins] text-sm">Albums</h2>
-          </li>
-          <li className="text-white flex-2">
-            {" "}
-            <h2 className=" text-slate-500 font-[poppins] text-sm">Time</h2>
-          </li>
-        </ul>
-        <ul className="flex w-full mb-3 hover:bg-rose-500 duration-300 cursor-pointer rounded-lg">
-          <li className="text-white flex-1 flex items-center gap-2 ml-3">
+      <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
+      <div className="w-[50vw] h-[350px]  ">
+        <ul className="flex w-full mb-3 bg-slate-900 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-xl">
+          <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
+            <PlayArrow />
             <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
               <img
                 className=" object-cover"
@@ -92,15 +85,19 @@ const Intro = () => {
               7LIWA - SEÑORITA FT. DJ{" "}
             </span>
           </li>
-          <li className="text-white flex-1 ">
-            <div className="h-[50px] flex items-center">
+          <li className="text-white  w-[10%]">
+            <div className="h-[50px] flex justify-end items-center">
               <div className="font-[poppins] text-sm">7liwa</div>
             </div>
           </li>
-          <li className="text-white flex-2">
-            {" "}
-            <div className="h-[50px] flex items-center">
-              <div className="font-[poppins] text-sm mr-1">3:28</div>
+          <li className="text-white w-[45%]">
+            <div className="h-[50px] flex justify-end items-center">
+              <div className="font-[poppins] text-sm gap-5 flex items-center">
+                <div>
+                  <FavoriteBorder className="text-slate-300" />
+                </div>
+                <div className="font-[poppins]">3 : 54</div>
+              </div>
             </div>
           </li>
         </ul>
@@ -110,3 +107,19 @@ const Intro = () => {
 };
 
 export default Intro;
+
+/**  <ul className="flex w-full mb-3">
+          <li className="text-white flex-1">
+            <h2 className=" flex  text-slate-500 text-sm justify-center">
+              Songs
+            </h2>
+          </li>
+          <li className="text-white flex-1 ">
+            {" "}
+            <h2 className=" text-slate-500 font-[poppins] text-sm">Albums</h2>
+          </li>
+          <li className="text-white flex-2">
+            {" "}
+            <h2 className=" text-slate-500 font-[poppins] text-sm">Time</h2>
+          </li>
+        </ul> */
