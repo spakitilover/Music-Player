@@ -23,19 +23,31 @@ export class MusicService {
   async findOne(id: number) {
     const music = await this.musicRepo.findOne({
       where: { id: id },
+      relations: {
+        likes: true,
+        albums: true,
+      },
     });
 
     return music;
   }
 
-  async create(id: number, file: string) {
+  async update(id: number, image: string) {
+    const music = await this.musicRepo.findOne({
+      where: { id: id },
+    });
+
+    return await this.musicRepo.save({ ...music, image });
+  }
+
+  async create(id: number, file: string, image: string) {
     const album = await this.albumRepo.findOne({
       where: { id: id },
     });
 
     await this.albumRepo.save(album);
 
-    const music = await this.musicRepo.create({ song: file });
+    const music = await this.musicRepo.create({ song: file, image: image });
 
     music.albums = album;
 

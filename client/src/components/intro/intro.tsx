@@ -1,74 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Intro = () => {
+  const [albums, setAlbums] = useState<Albums[]>([]);
+
+  interface Albums {
+    id: number;
+    name: string;
+    image: string;
+  }
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_LOCALHOST}albums`)
+      .then((res) => setAlbums(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className="p-5 w-full ml-[300px] mt-[100px]">
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">
         Albums
       </div>
       <div className="flex flex-wrap gap-10  ">
-        <div>
-          <div className="w-[200px] h-[200px] overflow-hidden rounded-md  ">
-            <img
-              className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300"
-              src="https://images.genius.com/3840f9abae5f6d441628f2e4c8f54e04.517x517x1.jpg"
-            />
+        {albums.map((item) => (
+          <div>
+            <div className="w-[200px] h-[200px] overflow-hidden rounded-md  ">
+              <Link to={`/albumsSongs/${item.id}`}>
+                <img
+                  className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300"
+                  src={item.image}
+                />
+              </Link>
+            </div>
+            <div className="text-white p-3 font-[poppins]">{item.name}</div>
           </div>
-          <div className="text-white p-3 font-[poppins]">PAUSE FLOW</div>
-        </div>
-        <div>
-          <div className="w-[200px] h-[200px] overflow-hidden rounded-md  ">
-            {" "}
-            <img
-              className=" object-cover cursor-pointer  hover:opacity-80 hover:scale-105 duration-300"
-              src="https://media.pitchfork.com/photos/5e273d36d7f8cd0008150f58/1:1/w_600/eminem_music.jpg"
-            />
-          </div>
-          <div className="text-white p-3 font-[poppins]">Eminem</div>
-        </div>
-        <div>
-          <div className="w-[200px] h-[200px] overflow-hidden rounded-md ">
-            {" "}
-            <img
-              className=" object-cover cursor-pointer  hover:opacity-80 hover:scale-105 duration-300"
-              src="https://i.scdn.co/image/ab6761610000e5eb6d9d36888cf60c07345622a3"
-            />
-          </div>
-          <div className="text-white p-3 font-[poppins]">T-FLOW</div>
-        </div>
-        <div>
-          <div className="w-[200px] h-[200px]  overflow-hidden rounded-md ">
-            {" "}
-            <img
-              className=" object-cover cursor-pointer  hover:opacity-80 hover:scale-105 duration-300 "
-              src="https://yt3.googleusercontent.com/ytc/AGIKgqPfEfAWZaGDcCZjDo55mLDlb-Tqj3M_YOrIJdIqgQ=s900-c-k-c0x00ffffff-no-rj"
-            />
-          </div>
-          <div className="text-white p-3 font-[poppins]">System of a down</div>
-        </div>
-        <div>
-          <div className="w-[200px] h-[200px] overflow-hidden rounded-md ">
-            {" "}
-            <img
-              className=" object-cover cursor-pointer  hover:opacity-80 hover:scale-105 duration-300 "
-              src="https://resources.tidal.com/images/758bda3f/0ac8/407e/b3d4/d6037ac067cc/640x640.jpg"
-            />
-          </div>
-          <div className="text-white p-3 font-[poppins]">Nightcore</div>
-        </div>
-        <div>
-          <div className="w-[200px] h-[200px] rounded-md overflow-hidden">
-            {" "}
-            <img
-              className=" object-cover cursor-pointer  hover:opacity-80 hover:scale-105 duration-300"
-              src="https://res.klook.com/image/upload/x_519,y_0,w_881,h_1234,c_crop/c_fill,ar_1:1/v1659946710/events_admin/kgvluv2e4qe5nzptjtcz.jpg"
-            />
-          </div>
-          <div className="text-white p-3 font-[poppins]">Alan Wolker</div>
-        </div>
+        ))}
       </div>
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
       <div className="w-[50vw] h-[350px]  ">

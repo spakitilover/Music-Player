@@ -57,6 +57,14 @@ export class UsersService {
     return await this.usersRepo.save({ ...user, password: hash });
   }
 
+  async createImage(id: number, image: string) {
+    const user = await this.usersRepo.findOne({
+      where: { id: id },
+    });
+
+    return await this.usersRepo.save({ ...user, image });
+  }
+
   async remove(id: number) {
     const user = await this.usersRepo.findOne({
       where: { id: id },

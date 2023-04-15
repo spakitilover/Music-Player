@@ -21,6 +21,9 @@ export class Users {
   @Column()
   username: string;
 
+  @Column({ nullable: true })
+  image: string;
+
   @Column()
   email: string;
 

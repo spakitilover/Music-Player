@@ -5,11 +5,20 @@ import Albums from "./pages/albums/albums";
 import AlbumSongs from "./pages/albumSongs/albumSongs";
 import LikedSongs from "./pages/likedSongs/likedSongs";
 import Profile from "./pages/profile/profile";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Main from "./components/main/main";
 
 function App() {
   return (
     <div className="App">
-      <Profile />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/albums" element={<Albums />} />
+        <Route path="/albumsSongs/:id" element={<AlbumSongs />} />
+        <Route path="/likedSongs" element={<LikedSongs />} />
+      </Routes>
     </div>
   );
 }

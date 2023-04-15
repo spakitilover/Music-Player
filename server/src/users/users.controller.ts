@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Param,
+  Patch,
+  UploadedFile,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersDto } from './dto/users.dto';
 
@@ -21,7 +30,7 @@ export class UsersController {
     return this.usersService.findByUsername(username);
   }
 
-  @Post()
+  @Post('create')
   create(@Body() usersDto: UsersDto) {
     return this.usersService.create(usersDto);
   }
@@ -30,4 +39,10 @@ export class UsersController {
   remove(@Param('id') id: number) {
     return this.usersService.remove(id);
   }
+
+  @Patch('create/image/:id')
+  createImage(
+    @Param('id') id: number,
+    @UploadedFile('image') image: Express.Multer.File,
+  ) {}
 }

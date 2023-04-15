@@ -17,11 +17,30 @@ export class AlbumsService {
     });
   }
 
+  async findOne(id: number) {
+    const album = await this.albumRepo.findOne({
+      where: { id: id },
+      relations: { music: true },
+    });
+    if (!album) {
+      throw new NotFoundException();
+    }
+    return album;
+  }
+
   async create(name: string) {
     const album = await this.albumRepo.create({ name });
     return this.albumRepo.save(album);
   }
 
+  /*async update(id: number, image: string) {
+    const album = await this.albumRepo.findOne({
+      where: { id: id },
+    });
+
+    return await this.albumRepo.save({ ...album, image });
+  }
+*/
   async remove(id: number) {
     const album = await this.albumRepo.findOne({
       where: { id: id },

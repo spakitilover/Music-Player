@@ -1,16 +1,14 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   return (
     <div className=" h-screen w-full bg-orange-400">
-      <div className="fixed text-white text-5xl font-['Pacifico'] p-10 ">
-        Kabati Music
-      </div>
       <div className="flex h-full ">
         <div className="flex-1 flex justify-center items-center bubble ">
-          <div className="w-full h-full flex justify-center items-end">
+          <div className="w-full h-full flex justify-center items-center">
             <img
-              className="w-[750px] h-[750px] z-10 object-contain"
+              className="w-[800px] h-[800px] z-10 object-contain"
               src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/52746/headphone-emoji-clipart-xl.png"
             />
           </div>
@@ -24,14 +22,16 @@ const Main = () => {
                 </span>
               </div>
               <div className="flex justify-center items-center my-5">
-                <p className="text-2xl text-slate-100 text-center">
+                <p className="text-2xl text-slate-100 text-center font-[poppins]">
                   Without Music , Life would be a mistake
                 </p>
               </div>
               <div className=" flex justify-center items-center ">
-                <button className="p-5 bg-slate-800 text-white w-[300px] rounded-md font-['Press_Start_2P']">
-                  START LISTENING
-                </button>
+                <Link to={"/home"}>
+                  <button className="p-5 bg-slate-800 text-white w-[300px] rounded-md font-['Press_Start_2P'] hover:text-rose-600 duration-300">
+                    START LISTENING
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

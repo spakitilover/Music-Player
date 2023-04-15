@@ -5,6 +5,7 @@ import PersonOutlineOutlined from "@mui/icons-material/PersonOutlineOutlined";
 import LibraryMusicOutlined from "@mui/icons-material/LibraryMusicOutlined";
 import CottageOutlined from "@mui/icons-material/CottageOutlined";
 import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -17,7 +18,11 @@ const Sidebar = () => {
           />
         </div>
         <div className="flex justify-center">
-          <span className="font-['Poppins'] text-white">Tarik Kabaki</span>
+          <Link to={"/profile"}>
+            <span className="font-['Poppins'] text-white hover:underline cursor-pointer">
+              Tarik Kabaki
+            </span>
+          </Link>
         </div>
         <div className="flex justify-center">
           <span className="text-slate-500 font-['Poppins']">
@@ -26,23 +31,31 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="p-5">
-        <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600 hover:text-white duration-200 p-3 rounded-md">
-          <CottageOutlined className="text-white" />
-          <span className="font-['Poppins'] text-white">Home</span>
-        </div>
-        <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600 hover:text-white duration-200 p-3 rounded-md">
-          <PersonOutlineOutlined className="text-white" />
-          <span className="font-['Poppins'] text-white">Profile</span>
-        </div>
+        <Link to={"/home"}>
+          <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600 hover:text-white duration-200 p-3 rounded-md">
+            <CottageOutlined className="text-white" />
+            <span className="font-['Poppins'] text-white">Home</span>
+          </div>
+        </Link>
+        <Link to={"/profile"}>
+          <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600 hover:text-white duration-200 p-3 rounded-md">
+            <PersonOutlineOutlined className="text-white" />
 
-        <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600  duration-200 p-3 rounded-md">
-          <LibraryMusicOutlined className="text-white" />
-          <span className="font-['Poppins'] text-white">Albums</span>
-        </div>
-        <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600 hover:text-white duration-200 p-3 rounded-md">
-          <StarBorderOutlined className="text-white" />
-          <span className="font-['Poppins'] text-white">Favourites</span>
-        </div>
+            <span className="font-['Poppins'] text-white">Profile</span>
+          </div>
+        </Link>
+        <Link to={"/albums"}>
+          <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600  duration-200 p-3 rounded-md">
+            <LibraryMusicOutlined className="text-white" />
+            <span className="font-['Poppins'] text-white">Albums</span>
+          </div>
+        </Link>
+        <Link to={"/likedSongs"}>
+          <div className="flex items-center cursor-pointer mb-8 gap-2 hover:bg-rose-600 hover:text-white duration-200 p-3 rounded-md">
+            <StarBorderOutlined className="text-white" />
+            <span className="font-['Poppins'] text-white">Favourites</span>
+          </div>
+        </Link>
       </div>
     </div>
   );

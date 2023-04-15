@@ -18,6 +18,12 @@ export class Albums {
   @Column()
   name: string;
 
+  @Column({ nullable: true })
+  type: string;
+
+  @Column({ nullable: true })
+  image: string;
+
   @OneToMany(() => Music, (music) => music.albums)
   music: Music;
 
