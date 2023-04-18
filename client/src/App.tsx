@@ -7,6 +7,7 @@ import LikedSongs from "./pages/likedSongs/likedSongs";
 import Profile from "./pages/profile/profile";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "./components/main/main";
+import Playlist from "./components/playlist/playlist";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/albumsSongs/:id" element={<AlbumSongs />} />
         <Route path="/likedSongs" element={<LikedSongs />} />
       </Routes>
+      <Playlist />
     </div>
   );
 }

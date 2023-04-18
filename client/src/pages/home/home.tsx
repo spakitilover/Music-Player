@@ -10,7 +10,6 @@ const Home = () => {
     <>
       <Sidebar />
       <Navbar />
-      <Playlist />
       <div className="flex bg-black">
         <Intro />
       </div>

@@ -6,40 +6,21 @@ import Pause from "@mui/icons-material/Pause";
 import SkipNext from "@mui/icons-material/SkipNext";
 import SkipPrevious from "@mui/icons-material/SkipPrevious";
 import Slider from "@mui/material/Slider";
-import Stack from "@mui/material/Stack";
-import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import VolumeOff from "@mui/icons-material/VolumeOff";
 
 const Playlist = () => {
   const audioElm = useRef<any>(null);
   const Click = useRef<any>(null);
-  const [songs, setSongs] = useState<Songs[]>([]);
+  //const [songs, setSongs] = useState<Songs[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [length, setLength] = useState(0);
+  const [liveDuration, setLiveDuration] = useState("");
   const [currentSong, setCurrentSong] = useState<any>(0);
-
-  interface Songs {
-    id: number;
-    song: string;
-    image: string;
-    name: string;
-    albums: Albums;
-  }
-
-  interface Albums {
-    id: number;
-    image: string;
-    type: string;
-    name: string;
-  }
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_LOCALHOST}music`)
-      .then((res) => setSongs(res.data));
-  }, []);
+  const [volume, setVolume] = useState(1.0);
+  const Musics = useSelector((state: any) => state.music.Music);
 
   const handlePlay = () => {
     setIsPlaying(!isPlaying);
@@ -54,7 +35,7 @@ const Playlist = () => {
   }, [isPlaying]);
 
   const NextSong = () => {
-    const isLast = currentSong === songs.length - 1;
+    const isLast = currentSong === Musics.length - 1;
     const newI = isLast ? 0 : currentSong + 1;
     setCurrentSong(newI);
     setIsPlaying(!isPlaying);
@@ -63,7 +44,7 @@ const Playlist = () => {
 
   const PrevSong = () => {
     const isFirstSlide = currentSong === 0;
-    const newI = isFirstSlide ? songs.length - 1 : currentSong - 1;
+    const newI = isFirstSlide ? Musics.length - 1 : currentSong - 1;
     setCurrentSong(newI);
     setIsPlaying(!isPlaying);
     audioElm.current.currentTime = 0;
@@ -72,54 +53,59 @@ const Playlist = () => {
   const onPlaying = () => {
     const duration = audioElm.current?.duration;
     const getLiveDuration = audioElm.current?.currentTime;
-
     setDuration(duration);
     setLength((getLiveDuration / duration) * 100);
+    const mins = Math.floor(getLiveDuration / 60);
+    const secs = Math.floor(getLiveDuration % 60);
+    const totals = `${padTo2Digits(mins)}:${padTo2Digits(secs)}`;
+    setLiveDuration(totals);
   };
 
   const handleWidth = (e: any) => {
     const getWidth = Click.current?.clientWidth;
     const offset = e.nativeEvent.offsetX;
-
     const divProgress = (offset / getWidth) * 100;
     audioElm.current.currentTime = (divProgress / 100) * duration;
   };
-
-  const min = Math.floor(duration / 60);
-
-  const sec = Math.floor(duration % 60);
-
-  const total = `${padTo2Digits(min)}:${padTo2Digits(sec)}`;
-
   function padTo2Digits(num: any) {
     return num.toString().padStart(2, "0");
   }
 
+  //Format For Duration
+  const min = Math.floor(duration / 60);
+  const sec = Math.floor(duration % 60);
+  const total = `${padTo2Digits(min)}:${padTo2Digits(sec)}`;
+
+  const handleVolume = (e: number) => {
+    setVolume(e);
+    audioElm.current.volume = e;
+  };
+
   return (
     <>
-      <audio
-        ref={audioElm}
-        src={`${process.env.REACT_APP_LOCALHOST}music/${songs[currentSong]?.song}`}
-        onTimeUpdate={onPlaying}
-      />
       <div className="border-t-[1px] bg-black flex items-center border-rose-900 h-[100px] w-full fixed bottom-0 z-40">
+        <audio
+          ref={audioElm}
+          src={`${process.env.REACT_APP_LOCALHOST}music/${Musics[currentSong]?.song}`}
+          onTimeUpdate={onPlaying}
+        />
         <div className="text-white flex items-center justify-between w-full p-10">
           <div className="flex justify-start items-center  w-[30%]">
             <div className="">
               <img
                 className="w-[70px] h-[70px] rounded-md  object-cover"
-                src={songs[currentSong]?.image}
+                src={Musics[currentSong]?.image}
               />
             </div>
             <div className="p-5">
               <div>
                 <span className="font-[poppins]">
-                  {songs[currentSong]?.song}
+                  {Musics[currentSong]?.song}
                 </span>
               </div>
               <div>
                 <span className="text-slate-500 font-[poppins]">
-                  {songs[currentSong]?.albums.name}
+                  {Musics[currentSong]?.albums.name}
                 </span>
               </div>
             </div>
@@ -134,12 +120,19 @@ const Playlist = () => {
                 >
                   <SkipPrevious style={{ fontSize: "40px" }} />
                 </div>
-                <div className=" cursor-pointer hover:bg-rose-500 p-1  rounded-full duration-200">
-                  <PlayArrow
-                    style={{ fontSize: "40px" }}
+                {isPlaying ? (
+                  <div className=" cursor-pointer hover:bg-rose-500 p-1  rounded-full duration-200">
+                    <Pause style={{ fontSize: "40px" }} onClick={handlePlay} />
+                  </div>
+                ) : (
+                  <div
+                    className=" cursor-pointer hover:bg-rose-500 p-1  rounded-full duration-200"
                     onClick={handlePlay}
-                  />
-                </div>
+                  >
+                    <PlayArrow style={{ fontSize: "40px" }} />
+                  </div>
+                )}
+
                 <div
                   className=" cursor-pointer hover:bg-rose-500 p-1  rounded-full duration-200"
                   onClick={NextSong}
@@ -149,13 +142,12 @@ const Playlist = () => {
               </div>
               <div className="w-[30vw] flex items-center gap-5">
                 <div className="text-sm font-[poppins] text-slate-500">
-                  0:00
+                  {liveDuration}
                 </div>
                 <Slider
                   size="small"
                   defaultValue={0}
                   aria-label="Small"
-                  valueLabelDisplay="auto"
                   value={length}
                   onClick={handleWidth}
                   ref={Click}
@@ -168,6 +160,17 @@ const Playlist = () => {
           </div>
 
           <div className=" gap-3 w-[30%] flex justify-end">
+            <div className="w-[150px] flex gap-3 items-center">
+              {volume < 0.01 ? <VolumeOff /> : <VolumeUp />}
+              <Slider
+                size="small"
+                defaultValue={volume}
+                max={1.0}
+                step={0.01}
+                aria-label="Small"
+                onChange={(e: any) => handleVolume(e.target.value)}
+              />
+            </div>
             <div>
               <FavoriteBorder />
             </div>

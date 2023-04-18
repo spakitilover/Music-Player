@@ -4,9 +4,13 @@ import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Intro = () => {
   const [albums, setAlbums] = useState<Albums[]>([]);
+  const dispatch = useDispatch();
+  const Musics = useSelector((state: any) => state.music.Music);
 
   interface Albums {
     id: number;
@@ -42,36 +46,41 @@ const Intro = () => {
         ))}
       </div>
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
-      <div className="w-[50vw] h-[350px]  ">
-        <ul className="flex w-full mb-3 bg-slate-900 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-xl">
-          <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
-            <PlayArrow />
-            <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
-              <img
-                className=" object-cover"
-                src="https://i.scdn.co/image/ab67616d0000b273dc139ce5434df86c492a93df"
-              />
-            </div>
-            <span className="font-[poppins] text-sm w-[50%]">
-              7LIWA - SEÑORITA FT. DJ{" "}
-            </span>
-          </li>
-          <li className="text-white  w-[10%]">
-            <div className="h-[50px] flex justify-end items-center">
-              <div className="font-[poppins] text-sm">7liwa</div>
-            </div>
-          </li>
-          <li className="text-white w-[45%]">
-            <div className="h-[50px] flex justify-end items-center">
-              <div className="font-[poppins] text-sm gap-5 flex items-center">
-                <div>
-                  <FavoriteBorder className="text-slate-300" />
-                </div>
-                <div className="font-[poppins]">3 : 54</div>
+      <div className="w-[50vw] h-[300px] overflow-auto">
+        {Musics.map((item: any) => (
+          <ul className="flex w-full mb-3 bg-slate-900 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-xl">
+            <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
+              <PlayArrow />
+              <div className="">
+                <img
+                  className="w-[40px] h-[40px] rounded-md  object-cover"
+                  src={item.image}
+                />
               </div>
-            </div>
-          </li>
-        </ul>
+              <span className="font-[poppins] text-sm w-[50%]">
+                {item.song}
+              </span>
+            </li>
+            <li className="text-white  w-[10%]">
+              <div className="h-[50px] flex justify-end items-center">
+                <div className="font-[poppins] text-sm">
+                  {" "}
+                  {item.albums.name}
+                </div>
+              </div>
+            </li>
+            <li className="text-white w-[45%]">
+              <div className="h-[50px] flex justify-end items-center">
+                <div className="font-[poppins] text-sm gap-5 flex items-center">
+                  <div>
+                    <FavoriteBorder className="text-slate-300" />
+                  </div>
+                  <div className="font-[poppins]">3 : 54</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        ))}
       </div>
     </div>
   );

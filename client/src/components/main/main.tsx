@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { getAllMusic } from "../../redux/musicSlice";
+import { useDispatch } from "react-redux";
 
 const Main = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_LOCALHOST}music`).then((res) => {
+      dispatch(getAllMusic(res.data));
+    });
+  }, []);
   return (
     <div className=" h-screen w-full bg-orange-400">
       <div className="flex h-full ">
