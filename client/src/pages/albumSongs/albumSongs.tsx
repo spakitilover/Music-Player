@@ -9,6 +9,7 @@ import axios from "axios";
 
 const AlbumSongs = () => {
   const [singleAlbum, setSingleAlbum] = useState<SingleAlbum>();
+  const [singleSong, setSingleSong] = useState<any>();
   const param = useParams();
 
   interface SingleAlbum {
@@ -30,6 +31,13 @@ const AlbumSongs = () => {
       .then((res) => setSingleAlbum(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  const test = (id: number) => {
+    axios
+      .get(`${process.env.REACT_APP_LOCALHOST}music/${id}`)
+      .then((res) => setSingleSong(res.data))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -54,7 +62,13 @@ const AlbumSongs = () => {
               {singleAlbum?.music.map((item) => (
                 <ul className="flex w-full mb-3 bg-slate-800 bg-opacity-50 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-xl">
                   <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
-                    <PlayArrow />
+                    <div
+                      className="p-2 bg-gray-900 rounded-md flex justify-center items-center hover:bg-gray-700 duration-200"
+                      onClick={() => test(item.id)}
+                    >
+                      <PlayArrow />
+                    </div>
+
                     <div className="">
                       <img
                         className=" object-cover w-[40px] h-[40px] rounded-md "
