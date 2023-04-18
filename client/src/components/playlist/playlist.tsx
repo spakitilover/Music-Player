@@ -10,8 +10,6 @@ import Stack from "@mui/material/Stack";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import axios from "axios";
-import { get } from "http";
-import { Widget } from "styled-icons/boxicons-solid";
 
 const Playlist = () => {
   const audioElm = useRef<any>(null);
@@ -20,13 +18,20 @@ const Playlist = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [length, setLength] = useState(0);
-  const [live, setLive] = useState("");
   const [currentSong, setCurrentSong] = useState<any>(0);
 
   interface Songs {
     id: number;
     song: string;
     image: string;
+    name: string;
+    albums: Albums;
+  }
+
+  interface Albums {
+    id: number;
+    image: string;
+    type: string;
     name: string;
   }
 
@@ -80,6 +85,16 @@ const Playlist = () => {
     audioElm.current.currentTime = (divProgress / 100) * duration;
   };
 
+  const min = Math.floor(duration / 60);
+
+  const sec = Math.floor(duration % 60);
+
+  const total = `${padTo2Digits(min)}:${padTo2Digits(sec)}`;
+
+  function padTo2Digits(num: any) {
+    return num.toString().padStart(2, "0");
+  }
+
   return (
     <>
       <audio
@@ -90,18 +105,22 @@ const Playlist = () => {
       <div className="border-t-[1px] bg-black flex items-center border-rose-900 h-[100px] w-full fixed bottom-0 z-40">
         <div className="text-white flex items-center justify-between w-full p-10">
           <div className="flex justify-start items-center  w-[30%]">
-            <div className="w-[70px] h-[70px] rounded-md overflow-hidden">
+            <div className="">
               <img
-                className=" object-cover"
-                src="https://i.scdn.co/image/ab67616d0000b273dc139ce5434df86c492a93df"
+                className="w-[70px] h-[70px] rounded-md  object-cover"
+                src={songs[currentSong]?.image}
               />
             </div>
             <div className="p-5">
               <div>
-                <span className="font-[poppins]">7LIWA - SEÑORITA FT. DJ </span>
+                <span className="font-[poppins]">
+                  {songs[currentSong]?.song}
+                </span>
               </div>
               <div>
-                <span className="text-slate-500 font-[poppins]">7LIWA</span>
+                <span className="text-slate-500 font-[poppins]">
+                  {songs[currentSong]?.albums.name}
+                </span>
               </div>
             </div>
           </div>
@@ -142,7 +161,7 @@ const Playlist = () => {
                   ref={Click}
                 />
                 <div className="text-sm font-[poppins] text-slate-500">
-                  {duration}
+                  {total}
                 </div>
               </div>
             </div>
