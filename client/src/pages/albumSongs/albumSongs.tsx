@@ -5,11 +5,14 @@ import Playlist from "../../components/playlist/playlist";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { selectAlbum } from "../../redux/musicSlice";
 import axios from "axios";
 
 const AlbumSongs = () => {
   const [singleAlbum, setSingleAlbum] = useState<SingleAlbum>();
   const [singleSong, setSingleSong] = useState<any>();
+  const dispatch = useDispatch();
   const param = useParams();
 
   interface SingleAlbum {
@@ -39,6 +42,10 @@ const AlbumSongs = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleSelectAlbum = () => {
+    dispatch(selectAlbum(singleAlbum?.id));
+  };
+
   return (
     <>
       <Sidebar />
@@ -50,10 +57,16 @@ const AlbumSongs = () => {
             <div className="w-[400px] h-[400px] rounded-full overflow-hidden">
               <img className="object-cover" src={singleAlbum?.image} />
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-5">
               <span className="text-5xl font-[poppins] text-white">
                 {singleAlbum?.name}
               </span>
+              <div
+                onClick={handleSelectAlbum}
+                className="bg-rose-600 w-[60px] h-[60px] flex items-center cursor-pointer justify-center rounded-full p-3 hover:bg-rose-900 duration-300"
+              >
+                <PlayArrow style={{ fontSize: "35px", color: "white" }} />
+              </div>
             </div>
           </div>
 

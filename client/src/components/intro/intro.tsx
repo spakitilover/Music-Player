@@ -46,7 +46,7 @@ const Intro = () => {
         ))}
       </div>
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
-      <div className="w-[50vw] h-[300px] overflow-auto">
+      <div className="w-[50vw] h-[300px] overflow-auto p-5">
         {Musics.map((item: any) => (
           <ul className="flex w-full mb-3 bg-slate-900 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-xl">
             <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
@@ -58,7 +58,7 @@ const Intro = () => {
                 />
               </div>
               <span className="font-[poppins] text-sm w-[50%]">
-                {item.song}
+                {item.song.slice(0, 18)}...
               </span>
             </li>
             <li className="text-white  w-[10%]">
