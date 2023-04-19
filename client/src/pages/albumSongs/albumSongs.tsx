@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "../../components/sidebar/sidebar";
 import Navbar from "../../components/navbar/navbar";
 import Playlist from "../../components/playlist/playlist";
@@ -9,9 +9,10 @@ import { useDispatch } from "react-redux";
 import { selectAlbum } from "../../redux/musicSlice";
 import axios from "axios";
 
-const AlbumSongs = () => {
+const AlbumSongs: React.FC = () => {
   const [singleAlbum, setSingleAlbum] = useState<SingleAlbum>();
   const [singleSong, setSingleSong] = useState<any>();
+  const [songId, setSongId] = useState<any>();
   const dispatch = useDispatch();
   const param = useParams();
 
@@ -35,13 +36,6 @@ const AlbumSongs = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const test = (id: number) => {
-    axios
-      .get(`${process.env.REACT_APP_LOCALHOST}music/${id}`)
-      .then((res) => setSingleSong(res.data))
-      .catch((err) => console.log(err));
-  };
-
   const handleSelectAlbum = () => {
     dispatch(selectAlbum(singleAlbum?.id));
   };
@@ -50,7 +44,7 @@ const AlbumSongs = () => {
     <>
       <Sidebar />
       <Navbar />
-      <Playlist />
+      <Playlist songId={songId} />
       <div className="flex bg-black">
         <div className="ml-[300px] mt-[130px] w-full">
           <div className="p-5 flex gap-10">
@@ -77,7 +71,7 @@ const AlbumSongs = () => {
                   <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
                     <div
                       className="p-2 bg-gray-900 rounded-md flex justify-center items-center hover:bg-gray-700 duration-200"
-                      onClick={() => test(item.id)}
+                      onClick={() => setSongId(item.id)}
                     >
                       <PlayArrow />
                     </div>

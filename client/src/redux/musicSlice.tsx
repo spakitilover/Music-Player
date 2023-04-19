@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const MusicSlice = createSlice({
   name: "music",
   initialState: {
+    curr: 0,
     singleSong: [],
     singleAlbum: [],
     Album: [],
