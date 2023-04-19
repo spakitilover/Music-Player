@@ -10,20 +10,21 @@ import VolumeUp from "@mui/icons-material/VolumeUp";
 import { useSelector } from "react-redux";
 import VolumeOff from "@mui/icons-material/VolumeOff";
 import MusicNote from "@mui/icons-material/MusicNote";
+import { useDispatch } from "react-redux";
+import { next, prev } from "../../redux/musicSlice";
 
 const Playlist = (songId: any): JSX.Element => {
   const audioElm = useRef<any>(null);
   const Click = useRef<any>(null);
-  //const [songs, setSongs] = useState<Songs[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [length, setLength] = useState(0);
   const [liveDuration, setLiveDuration] = useState("");
-  const [currentSong, setCurrentSong] = useState<any>(0);
   const [volume, setVolume] = useState(1.0);
   const Musics = useSelector((state: any) => state.music.Music);
   const Albums = useSelector((state: any) => state.music.Album);
   const singleAlbum = useSelector((state: any) => state.music.singleAlbum);
+  const curr = useSelector((state: any) => state.music.curr);
 
   const handlePlay = () => {
     setIsPlaying(!isPlaying);
@@ -36,24 +37,6 @@ const Playlist = (songId: any): JSX.Element => {
       audioElm.current?.pause();
     }
   }, [isPlaying]);
-
-  const NextSong = () => {
-    const isLast = currentSong === singleAlbum[0]?.music?.length - 1;
-    const newI = isLast ? 0 : currentSong + 1;
-    setCurrentSong(newI);
-    setIsPlaying(!isPlaying);
-    audioElm.current.currentTime = 0;
-  };
-
-  const PrevSong = () => {
-    const isFirstSlide = currentSong === 0;
-    const newI = isFirstSlide
-      ? singleAlbum[0]?.music?.length - 1
-      : currentSong - 1;
-    setCurrentSong(newI);
-    setIsPlaying(!isPlaying);
-    audioElm.current.currentTime = 0;
-  };
 
   const onPlaying = () => {
     const duration = audioElm.current?.duration;
@@ -86,12 +69,26 @@ const Playlist = (songId: any): JSX.Element => {
     audioElm.current.volume = e;
   };
 
+  const dispatch = useDispatch();
+
+  const NextSong = () => {
+    dispatch(next());
+    setIsPlaying(!isPlaying);
+    audioElm.current.currentTime = 0;
+  };
+
+  const PrevSong = () => {
+    dispatch(prev());
+    setIsPlaying(!isPlaying);
+    audioElm.current.currentTime = 0;
+  };
+
   return (
     <>
       <div className="border-t-[1px] bg-black flex items-center border-rose-900 h-[100px] w-full fixed bottom-0 z-40">
         <audio
           ref={audioElm}
-          src={`${process.env.REACT_APP_LOCALHOST}music/${singleAlbum[0]?.music?.[currentSong]?.song}`}
+          src={`${process.env.REACT_APP_LOCALHOST}music/${singleAlbum[0]?.music?.[curr]?.song}`}
           onTimeUpdate={onPlaying}
         />
         {singleAlbum.length < 1 ? (
@@ -110,13 +107,13 @@ const Playlist = (songId: any): JSX.Element => {
               <div className="">
                 <img
                   className="w-[70px] h-[70px] rounded-md  object-cover"
-                  src={singleAlbum[0]?.music[currentSong]?.image}
+                  src={singleAlbum[0]?.music[curr]?.image}
                 />
               </div>
               <div className="p-5">
                 <div>
                   <span className="font-[poppins]">
-                    {singleAlbum[0]?.music[currentSong]?.song}
+                    {singleAlbum[0]?.music[curr]?.song}
                   </span>
                 </div>
                 <div>

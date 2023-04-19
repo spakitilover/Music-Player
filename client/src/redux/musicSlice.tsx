@@ -27,9 +27,24 @@ export const MusicSlice = createSlice({
 
       state.singleAlbum.push(...album);
     },
+
+    next: (state: any) => {
+      const isLast = state.curr === state.singleAlbum[0]?.music.length - 1;
+      const newI = isLast ? 0 : state.curr + 1;
+      state.curr = newI;
+    },
+
+    prev: (state: any) => {
+      const isFirstSlide = state.curr === 0;
+      const newI = isFirstSlide
+        ? state.singleAlbum[0]?.music?.length - 1
+        : state.curr - 1;
+      state.curr = newI;
+    },
   },
 });
 
-export const { getAllMusic, getAllAlbums, selectAlbum } = MusicSlice.actions;
+export const { getAllMusic, getAllAlbums, selectAlbum, next, prev } =
+  MusicSlice.actions;
 
 export default MusicSlice.reducer;
