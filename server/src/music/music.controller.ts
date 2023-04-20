@@ -24,6 +24,11 @@ export class MusicController {
     return this.musicService.find();
   }
 
+  @Get('single/:id')
+  findOne(@Param('id') id: number) {
+    return this.musicService.findOne(id);
+  }
+
   @Get(':songPath')
   getSongs(@Param('songPath') song, @Res() res) {
     return res.sendFile(song, { root: './uploads' });

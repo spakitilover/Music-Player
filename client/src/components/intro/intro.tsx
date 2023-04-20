@@ -6,6 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Music } from "../../interface/singleAlbum";
 
 const Intro = () => {
   const [albums, setAlbums] = useState<Albums[]>([]);
@@ -16,6 +17,7 @@ const Intro = () => {
     id: number;
     name: string;
     image: string;
+    music: Music[];
   }
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const Intro = () => {
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
       <div className="w-[50vw] h-[300px] overflow-auto p-5">
         {Musics.map((item: any) => (
-          <ul className="flex w-full mb-3 bg-slate-900 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-xl">
+          <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-1 rounded-md">
             <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
               <PlayArrow />
               <div className="">
@@ -69,11 +71,11 @@ const Intro = () => {
                 </div>
               </div>
             </li>
-            <li className="text-white w-[45%]">
+            <li className="text-white w-[45%] mr-2">
               <div className="h-[50px] flex justify-end items-center">
                 <div className="font-[poppins] text-sm gap-5 flex items-center">
                   <div>
-                    <FavoriteBorder className="text-slate-300" />
+                    <FavoriteBorder className="text-slate-300 hover:text-rose-600" />
                   </div>
                   <div className="font-[poppins]">3 : 54</div>
                 </div>

@@ -22,7 +22,7 @@ export class Users {
   username: string;
 
   @Column({ nullable: true })
-  image: string;
+  image?: string;
 
   @Column()
   email: string;

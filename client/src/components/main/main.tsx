@@ -8,18 +8,6 @@ import { useDispatch } from "react-redux";
 const Main = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_LOCALHOST}music`).then((res) => {
-      dispatch(getAllMusic(res.data));
-    });
-  }, []);
-
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_LOCALHOST}albums`).then((res) => {
-      dispatch(getAllAlbums(res.data));
-    });
-  }, []);
-
   return (
     <div className=" h-screen w-full bg-orange-400">
       <div className="flex h-full ">

@@ -12,6 +12,7 @@ import VolumeOff from "@mui/icons-material/VolumeOff";
 import MusicNote from "@mui/icons-material/MusicNote";
 import { useDispatch } from "react-redux";
 import { next, prev } from "../../redux/musicSlice";
+import { singleAlbum } from "../../interface/singleAlbum";
 
 const Playlist = (songId: any): JSX.Element => {
   const audioElm = useRef<any>(null);
@@ -21,9 +22,9 @@ const Playlist = (songId: any): JSX.Element => {
   const [length, setLength] = useState(0);
   const [liveDuration, setLiveDuration] = useState("");
   const [volume, setVolume] = useState(1.0);
-  const Musics = useSelector((state: any) => state.music.Music);
-  const Albums = useSelector((state: any) => state.music.Album);
-  const singleAlbum = useSelector((state: any) => state.music.singleAlbum);
+  const singleAlbum = useSelector(
+    (state: singleAlbum) => state.music.singleAlbum
+  );
   const curr = useSelector((state: any) => state.music.curr);
 
   const handlePlay = () => {
@@ -55,11 +56,11 @@ const Playlist = (songId: any): JSX.Element => {
     const divProgress = (offset / getWidth) * 100;
     audioElm.current.currentTime = (divProgress / 100) * duration;
   };
+
+  //Format For Duration
   function padTo2Digits(num: any) {
     return num.toString().padStart(2, "0");
   }
-
-  //Format For Duration
   const min = Math.floor(duration / 60);
   const sec = Math.floor(duration % 60);
   const total = `${padTo2Digits(min)}:${padTo2Digits(sec)}`;
@@ -94,7 +95,7 @@ const Playlist = (songId: any): JSX.Element => {
         {singleAlbum.length < 1 ? (
           <div className="text-white flex items-center justify-center w-full p-10 gap-3">
             <span className="font-['Press_Start_2P']">
-              Start With Selecting Your Album
+              Start With Selecting Your Album ,Songs
             </span>
 
             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 flex justify-center items-center">

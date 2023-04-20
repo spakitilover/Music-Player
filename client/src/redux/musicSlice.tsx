@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Albums, Music, singleAlbum } from "../interface/singleAlbum";
 
 export const MusicSlice = createSlice({
   name: "music",
@@ -10,7 +11,7 @@ export const MusicSlice = createSlice({
     Music: [],
   },
   reducers: {
-    getAllMusic: (state: any, action: any) => {
+    getAllMusic: (state: any, action) => {
       state.Music.push(...action.payload);
     },
 
@@ -41,10 +42,30 @@ export const MusicSlice = createSlice({
         : state.curr - 1;
       state.curr = newI;
     },
+
+    selectSong: (state: any, action) => {
+      const album = state.Album.filter(
+        (item: any) => item.id == action.payload.albumId
+      );
+      // clearing the array after insert another album !
+      state.singleAlbum = [];
+
+      state.singleAlbum.push(...album);
+      const SelectedSongId = state.singleAlbum[0]?.music.findIndex(
+        (item: any) => item.id === action.payload.musicId
+      );
+      state.curr = SelectedSongId;
+    },
   },
 });
 
-export const { getAllMusic, getAllAlbums, selectAlbum, next, prev } =
-  MusicSlice.actions;
+export const {
+  getAllMusic,
+  getAllAlbums,
+  selectAlbum,
+  next,
+  prev,
+  selectSong,
+} = MusicSlice.actions;
 
 export default MusicSlice.reducer;

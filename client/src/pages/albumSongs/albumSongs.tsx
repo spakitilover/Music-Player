@@ -6,8 +6,9 @@ import PlayArrow from "@mui/icons-material/PlayArrow";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { selectAlbum } from "../../redux/musicSlice";
+import { selectAlbum, selectSong } from "../../redux/musicSlice";
 import axios from "axios";
+import { Albums } from "../../interface/singleAlbum";
 
 const AlbumSongs: React.FC = () => {
   const [singleAlbum, setSingleAlbum] = useState<SingleAlbum>();
@@ -38,6 +39,17 @@ const AlbumSongs: React.FC = () => {
 
   const handleSelectAlbum = () => {
     dispatch(selectAlbum(singleAlbum?.id));
+  };
+
+  const HandleSelectSong = (item: any) => {
+    axios
+      .get(`${process.env.REACT_APP_LOCALHOST}music/single/${item}`)
+      .then((res) =>
+        dispatch(
+          selectSong({ musicId: res.data.id, albumId: res.data.albums.id })
+        )
+      )
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -71,7 +83,7 @@ const AlbumSongs: React.FC = () => {
                   <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
                     <div
                       className="p-2 bg-gray-900 rounded-md flex justify-center items-center hover:bg-gray-700 duration-200"
-                      onClick={() => setSongId(item.id)}
+                      onClick={() => HandleSelectSong(item.id)}
                     >
                       <PlayArrow />
                     </div>

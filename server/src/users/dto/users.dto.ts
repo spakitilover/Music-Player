@@ -3,5 +3,5 @@ export class UsersDto {
   username: string;
   password: string;
   image: string;
-  email: string;
+  email?: string;
 }
