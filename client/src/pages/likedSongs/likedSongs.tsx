@@ -3,10 +3,27 @@ import Sidebar from "../../components/sidebar/sidebar";
 import Navbar from "../../components/navbar/navbar";
 import Playlist from "../../components/playlist/playlist";
 import PlayArrow from "@mui/icons-material/PlayArrow";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { removeUserLike } from "../../redux/usersSlice";
+import { removeLikes } from "../../redux/musicSlice";
 
 const LikedSongs = () => {
+  const dispatch = useDispatch();
+  const likesSongs = useSelector((state: any) => state.users.CurrentUser);
+
+  const removeLike = (id: any) => {
+    axios
+      .delete(`${process.env.REACT_APP_LOCALHOST}likes/unlike/${id}`)
+      .then((res) => {
+        dispatch(removeUserLike({ id: id }));
+        dispatch(removeLikes({ id: id.id, ...res.data }));
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Sidebar />
@@ -29,35 +46,37 @@ const LikedSongs = () => {
           </div>
           <div className="text-white p-5">
             <div className="w-full h-[500px] bg-slate-800 bg-opacity-40  rounded-md p-5">
-              <ul className="flex w-full mb-3 bg-slate-800 bg-opacity-50 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-md">
-                <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
-                  <PlayArrow />
-                  <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
-                    <img
-                      className=" object-cover"
-                      src="https://i.scdn.co/image/ab67616d0000b273dc139ce5434df86c492a93df"
-                    />
-                  </div>
-                  <span className="font-[poppins] text-sm w-[50%]">
-                    7LIWA - SEÑORITA FT. DJ{" "}
-                  </span>
-                </li>
-                <li className="text-white  w-[10%]">
-                  <div className="h-[50px] flex justify-end items-center">
-                    <div className="font-[poppins] text-sm">7liwa</div>
-                  </div>
-                </li>
-                <li className="text-white w-[45%]">
-                  <div className="h-[50px] flex justify-end items-center">
-                    <div className="font-[poppins] text-sm gap-5 flex items-center">
-                      <div>
-                        <Favorite className="text-rose-600" />
-                      </div>
-                      <div className="font-[poppins]">3 : 54</div>
+              {likesSongs.likes.map((item: any) => (
+                <ul className="flex w-full mb-3 bg-slate-800 bg-opacity-50 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-md">
+                  <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
+                    <PlayArrow />
+                    <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
+                      <img className=" object-cover" src={item?.music?.image} />
                     </div>
-                  </div>
-                </li>
-              </ul>
+                    <span className="font-[poppins] text-sm w-[50%]">
+                      {item?.music?.song}
+                    </span>
+                  </li>
+                  <li className="text-white  w-[10%]">
+                    <div className="h-[50px] flex justify-end items-center">
+                      <div className="font-[poppins] text-sm">
+                        {" "}
+                        {item?.music?.albums?.name}
+                      </div>
+                    </div>
+                  </li>
+                  <li className="text-white w-[45%]">
+                    <div className="h-[50px] flex justify-end items-center">
+                      <div className="font-[poppins] text-sm gap-5 flex items-center">
+                        <div className="" onClick={() => removeLike(item.id)}>
+                          <Favorite className="text-rose-600" />
+                        </div>
+                        <div className="font-[poppins]">3 : 54</div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              ))}
             </div>
           </div>
         </div>

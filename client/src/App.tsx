@@ -9,6 +9,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "./components/main/main";
 import Playlist from "./components/playlist/playlist";
 import Login from "./pages/login/login";
+import { useSelector } from "react-redux";
 
 function App() {
   return (

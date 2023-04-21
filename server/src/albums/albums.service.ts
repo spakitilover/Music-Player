@@ -12,7 +12,12 @@ export class AlbumsService {
   find() {
     return this.albumRepo.find({
       relations: {
-        music: true,
+        music: {
+          like: {
+            users: true,
+            music: true,
+          },
+        },
       },
     });
   }
@@ -20,7 +25,14 @@ export class AlbumsService {
   async findOne(id: number) {
     const album = await this.albumRepo.findOne({
       where: { id: id },
-      relations: { music: true },
+      relations: {
+        music: {
+          like: {
+            users: true,
+            music: true,
+          },
+        },
+      },
     });
     if (!album) {
       throw new NotFoundException();

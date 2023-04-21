@@ -1,5 +1,6 @@
 import { Albums } from 'src/albums/entity/albums.entity';
 import { Users } from 'src/users/entity/users.entity';
+import { LikesEntity } from 'src/likes/entity/likes.entity';
 import {
   Column,
   Entity,
@@ -7,7 +8,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  ManyToMany,
+  OneToMany,
   JoinTable,
 } from 'typeorm';
 
@@ -25,8 +26,10 @@ export class Music {
   @ManyToOne(() => Albums, (albums) => albums.music)
   albums: Albums;
 
-  @ManyToMany(() => Users, (users) => users.likes)
-  likes: Music[];
+  @OneToMany(() => LikesEntity, (likes) => likes.music, {
+    onDelete: 'CASCADE',
+  })
+  like: LikesEntity[];
 
   @CreateDateColumn()
   created_at: Date;

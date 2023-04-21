@@ -13,10 +13,7 @@ export class UsersService {
   find() {
     return this.usersRepo.find({
       relations: {
-        likes: true,
-        favorites: {
-          music: true,
-        },
+        like: true,
       },
     });
   }
@@ -24,6 +21,14 @@ export class UsersService {
   async findOne(id: number) {
     const user = await this.usersRepo.findOne({
       where: { id: id },
+      relations: {
+        like: {
+          users: true,
+          music: {
+            albums: true,
+          },
+        },
+      },
     });
     if (!user) {
       throw new error();
@@ -35,9 +40,11 @@ export class UsersService {
     const user = await this.usersRepo.findOne({
       where: { username: username },
       relations: {
-        likes: true,
-        favorites: {
-          music: true,
+        like: {
+          users: true,
+          music: {
+            albums: true,
+          },
         },
       },
     });

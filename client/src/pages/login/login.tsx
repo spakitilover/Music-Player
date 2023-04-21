@@ -46,7 +46,7 @@ const Login = () => {
         </div>
         <div className="flex justify-center items-center h-full">
           <div className="w-[550px] h-auto">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center mb-5">
               <div className="my-5 flex justify-center items-center">
                 <img
                   src="https://t3.ftcdn.net/jpg/04/54/66/12/360_F_454661277_NtQYM8oJq2wOzY1X9Y81FlFa06DVipVD.jpg"
@@ -56,21 +56,21 @@ const Login = () => {
             </div>
 
             <div className="mb-10 flex justify-center">
-              <span className="text-white text-3xl font-['poppins']">
-                User Login
+              <span className="text-white text-3xl font-['Press_Start_2P']">
+                LOGIN
               </span>
             </div>
             <div>
               <div className="w-full flex justify-center mb-5 ">
                 <input
-                  className="p-4 w-[70%] rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-900"
+                  className="p-4 w-[70%] text-xl rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-500"
                   placeholder="Username"
                   onChange={(e: any) => setUsername(e.target.value)}
                 />
               </div>
               <div className="w-full flex justify-center">
                 <input
-                  className="p-4 w-[70%] rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-900"
+                  className="p-4 w-[70%] text-xl rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-500"
                   placeholder="Password"
                   type="password"
                   onChange={(e: any) => setPassword(e.target.value)}

@@ -129,13 +129,13 @@ const Playlist = (songId: any): JSX.Element => {
               <div>
                 <div className="flex justify-center gap-5">
                   <div
-                    className=" cursor-pointer hover:bg-rose-500 p-1  rounded-full duration-200 "
+                    className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full "
                     onClick={PrevSong}
                   >
                     <SkipPrevious style={{ fontSize: "40px" }} />
                   </div>
                   {isPlaying ? (
-                    <div className=" cursor-pointer hover:bg-rose-500 p-1  rounded-full duration-200">
+                    <div className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full">
                       <Pause
                         style={{ fontSize: "40px" }}
                         onClick={handlePlay}
@@ -143,7 +143,7 @@ const Playlist = (songId: any): JSX.Element => {
                     </div>
                   ) : (
                     <div
-                      className=" cursor-pointer hover:bg-rose-500 p-1  rounded-full duration-200"
+                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 p-1 hover:text-rose-500   rounded-full "
                       onClick={handlePlay}
                     >
                       <PlayArrow style={{ fontSize: "40px" }} />
@@ -151,7 +151,7 @@ const Playlist = (songId: any): JSX.Element => {
                   )}
 
                   <div
-                    className=" cursor-pointer hover:bg-rose-500 p-1  rounded-full duration-200"
+                    className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 p-1 hover:text-rose-500  rounded-full"
                     onClick={NextSong}
                   >
                     <SkipNext style={{ fontSize: "40px" }} />

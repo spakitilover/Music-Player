@@ -14,8 +14,11 @@ export class MusicService {
   async find() {
     return await this.musicRepo.find({
       relations: {
-        likes: true,
         albums: true,
+        like: {
+          users: true,
+          music: true,
+        },
       },
     });
   }
@@ -24,8 +27,11 @@ export class MusicService {
     const music = await this.musicRepo.findOne({
       where: { id: id },
       relations: {
-        likes: true,
         albums: true,
+        like: {
+          users: true,
+          music: true,
+        },
       },
     });
 

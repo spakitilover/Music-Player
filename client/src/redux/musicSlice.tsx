@@ -56,6 +56,27 @@ export const MusicSlice = createSlice({
       );
       state.curr = SelectedSongId;
     },
+
+    addingLike: (state: any, action) => {
+      state.Album.find((it: any) => it.id === action.payload.music.albums.id)
+        .music.find((item: any) => item.id === action.payload.music.id)
+        .like.push(action.payload);
+    },
+
+    removeLikes: (state: any, action) => {
+      const albums = state.Album.find(
+        (item: any) => item.id === action.payload.music.albums.id
+      );
+
+      albums.music
+        .find((i: any) => i.id === action.payload.music.id)
+        .like.splice(
+          albums.music
+            .find((x: any) => x.id === action.payload.music.id)
+            .like.findIndex((it: any) => it.id === action.payload.id),
+          1
+        );
+    },
   },
 });
 
@@ -66,6 +87,8 @@ export const {
   next,
   prev,
   selectSong,
+  addingLike,
+  removeLikes,
 } = MusicSlice.actions;
 
 export default MusicSlice.reducer;

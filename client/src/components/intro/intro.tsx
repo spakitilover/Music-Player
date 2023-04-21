@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PlayArrow from "@mui/icons-material/PlayArrow";
-import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Music } from "../../interface/singleAlbum";
+import Favorite from "@mui/icons-material/Favorite";
 
 const Intro = () => {
   const [albums, setAlbums] = useState<Albums[]>([]);
@@ -48,7 +48,7 @@ const Intro = () => {
         ))}
       </div>
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
-      <div className="w-[50vw] h-[300px] overflow-auto p-5">
+      <div className="w-[50vw] h-[300px] overflow-auto p-3">
         {Musics.map((item: any) => (
           <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-1 rounded-md">
             <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
@@ -74,8 +74,8 @@ const Intro = () => {
             <li className="text-white w-[45%] mr-2">
               <div className="h-[50px] flex justify-end items-center">
                 <div className="font-[poppins] text-sm gap-5 flex items-center">
-                  <div>
-                    <FavoriteBorder className="text-slate-300 hover:text-rose-600" />
+                  <div className="text-slate-500 hover:text-rose-600 duration-300 ">
+                    <Favorite className="" />
                   </div>
                   <div className="font-[poppins]">3 : 54</div>
                 </div>

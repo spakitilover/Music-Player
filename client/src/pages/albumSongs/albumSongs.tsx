@@ -3,19 +3,28 @@ import Sidebar from "../../components/sidebar/sidebar";
 import Navbar from "../../components/navbar/navbar";
 import Playlist from "../../components/playlist/playlist";
 import PlayArrow from "@mui/icons-material/PlayArrow";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import { useParams } from "react-router-dom";
+import Favorite from "@mui/icons-material/Favorite";
+import { useLocation, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { selectAlbum, selectSong } from "../../redux/musicSlice";
+import { addingLike, selectAlbum, selectSong } from "../../redux/musicSlice";
 import axios from "axios";
-import { Albums } from "../../interface/singleAlbum";
+import { useSelector } from "react-redux";
+import { addLike } from "../../redux/usersSlice";
+import { removeUserLike } from "../../redux/usersSlice";
+import { removeLikes } from "../../redux/musicSlice";
 
 const AlbumSongs: React.FC = () => {
-  const [singleAlbum, setSingleAlbum] = useState<SingleAlbum>();
+  // const [singleAlbum, setSingleAlbum] = useState<SingleAlbum>();
   const [singleSong, setSingleSong] = useState<any>();
   const [songId, setSongId] = useState<any>();
   const dispatch = useDispatch();
   const param = useParams();
+  const CurrentUser = useSelector((state: any) => state.users.CurrentUser);
+  const singleAlbums = useSelector((state: any) => state.music.Album);
+  const location = useLocation();
+  const idId = location.pathname.split("/")[2];
+
+  const singleAlbum = singleAlbums.find((i: any) => i.id == idId);
 
   interface SingleAlbum {
     id: number;
@@ -28,15 +37,16 @@ const AlbumSongs: React.FC = () => {
     id: number;
     song: string;
     image: string;
+    like: any;
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_LOCALHOST}albums/${param.id}`)
       .then((res) => setSingleAlbum(res.data))
       .catch((err) => console.log(err));
   }, []);
-
+*/
   const handleSelectAlbum = () => {
     dispatch(selectAlbum(singleAlbum?.id));
   };
@@ -49,6 +59,32 @@ const AlbumSongs: React.FC = () => {
           selectSong({ musicId: res.data.id, albumId: res.data.albums.id })
         )
       )
+      .catch((err) => console.log(err));
+  };
+
+  // handling likes API
+
+  const handleLike = (id: any) => {
+    axios
+      .post(
+        `${process.env.REACT_APP_LOCALHOST}likes/addlike/${CurrentUser.id}`,
+        {
+          musicId: id,
+        }
+      )
+      .then((res) => {
+        dispatch(addLike(res.data));
+        dispatch(addingLike(res.data));
+      });
+  };
+
+  const removeLike = (id: any) => {
+    axios
+      .delete(`${process.env.REACT_APP_LOCALHOST}likes/unlike/${id.id}`)
+      .then((res) => {
+        dispatch(removeUserLike({ id: id.id }));
+        dispatch(removeLikes({ id: id.id, ...res.data }));
+      })
       .catch((err) => console.log(err));
   };
 
@@ -78,8 +114,8 @@ const AlbumSongs: React.FC = () => {
 
           <div className="text-white p-5">
             <div className="w-full h-[500px] bg-slate-800 bg-opacity-40  rounded-md p-5">
-              {singleAlbum?.music.map((item) => (
-                <ul className="flex w-full mb-3 bg-slate-800 bg-opacity-50 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-xl">
+              {singleAlbum?.music.map((item: any) => (
+                <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-2 rounded-xl">
                   <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
                     <div
                       className="p-2 bg-gray-900 rounded-md flex justify-center items-center hover:bg-gray-700 duration-200"
@@ -108,9 +144,30 @@ const AlbumSongs: React.FC = () => {
                   <li className="text-white w-[45%]">
                     <div className="h-[50px] flex justify-end items-center">
                       <div className="font-[poppins] text-sm gap-5 flex items-center">
-                        <div>
-                          <FavoriteBorder className="text-slate-300" />
-                        </div>
+                        {item.like
+                          ?.map((it: any) => it.users.id)
+                          .includes(CurrentUser.id) ? (
+                          <div
+                            className="text-rose-600"
+                            onClick={() =>
+                              removeLike(
+                                item.like.find(
+                                  (itm: any) => itm.users.id === CurrentUser.id
+                                )
+                              )
+                            }
+                          >
+                            <Favorite className="" />
+                          </div>
+                        ) : (
+                          <div
+                            className="text-slate-500 hover:text-rose-600 duration-300"
+                            onClick={() => handleLike(item.id)}
+                          >
+                            <Favorite className="" />
+                          </div>
+                        )}
+
                         <div className="font-[poppins]">3 : 54</div>
                       </div>
                     </div>

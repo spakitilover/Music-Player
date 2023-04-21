@@ -1,12 +1,13 @@
 import { Albums } from 'src/albums/entity/albums.entity';
 import { Music } from 'src/music/entity/music.entity';
+import { LikesEntity } from 'src/likes/entity/likes.entity';
 import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
+  OneToMany,
   JoinTable,
 } from 'typeorm';
 
@@ -30,17 +31,8 @@ export class Users {
   @Column()
   password: string;
 
-  @ManyToMany(() => Albums, (albums) => albums.users)
-  @JoinTable({ name: 'userAlbums' })
-  albums: Albums[];
-
-  @ManyToMany(() => Albums, (albums) => albums.users)
-  @JoinTable({ name: 'favorites' })
-  favorites: Albums[];
-
-  @ManyToMany(() => Music, (music) => music.likes)
-  @JoinTable({ name: 'likes' })
-  likes: Music[];
+  @OneToMany(() => LikesEntity, (like) => like.users)
+  like: LikesEntity[];
 
   @CreateDateColumn()
   created_at: Date;

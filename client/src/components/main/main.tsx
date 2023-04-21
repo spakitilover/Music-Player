@@ -33,7 +33,7 @@ const Main = () => {
                 </p>
               </div>
               <div className=" flex justify-center items-center ">
-                <Link to={"/home"}>
+                <Link to={"/login"}>
                   <button className="p-5 bg-slate-800 text-white w-[300px] rounded-md font-['Press_Start_2P'] hover:text-rose-600 duration-300">
                     START LISTENING
                   </button>

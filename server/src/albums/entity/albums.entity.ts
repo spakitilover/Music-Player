@@ -27,12 +27,6 @@ export class Albums {
   @OneToMany(() => Music, (music) => music.albums)
   music: Music;
 
-  @ManyToMany(() => Users, (users) => users.albums)
-  users: Users[];
-
-  @ManyToMany(() => Users, (users) => users.albums)
-  favorites: Users[];
-
   @CreateDateColumn()
   created_at: Date;
 
