@@ -10,7 +10,7 @@ const Profile = () => {
     <>
       <Sidebar />
       <Navbar />
-      <Playlist />
+
       <div className="flex bg-black">
         <div className="ml-[300px] mt-[130px] w-full p-5">
           <div className="p-5 flex gap-10">

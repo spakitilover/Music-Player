@@ -30,6 +30,15 @@ const Playlist = (songId: any): JSX.Element => {
   const handlePlay = () => {
     setIsPlaying(!isPlaying);
   };
+  const NextSong = () => {
+    dispatch(next());
+    audioElm.current.currentTime = 0;
+  };
+
+  const PrevSong = () => {
+    dispatch(prev());
+    audioElm.current.currentTime = 0;
+  };
 
   useEffect(() => {
     if (isPlaying) {
@@ -37,7 +46,7 @@ const Playlist = (songId: any): JSX.Element => {
     } else {
       audioElm.current?.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, NextSong, PrevSong]);
 
   const onPlaying = () => {
     const duration = audioElm.current?.duration;
@@ -71,18 +80,6 @@ const Playlist = (songId: any): JSX.Element => {
   };
 
   const dispatch = useDispatch();
-
-  const NextSong = () => {
-    dispatch(next());
-    setIsPlaying(!isPlaying);
-    audioElm.current.currentTime = 0;
-  };
-
-  const PrevSong = () => {
-    dispatch(prev());
-    setIsPlaying(!isPlaying);
-    audioElm.current.currentTime = 0;
-  };
 
   return (
     <>

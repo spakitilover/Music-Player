@@ -63,14 +63,14 @@ const Login = () => {
             <div>
               <div className="w-full flex justify-center mb-5 ">
                 <input
-                  className="p-4 w-[70%] text-xl rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-500"
+                  className="p-4 w-[70%] rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-500"
                   placeholder="Username"
                   onChange={(e: any) => setUsername(e.target.value)}
                 />
               </div>
               <div className="w-full flex justify-center">
                 <input
-                  className="p-4 w-[70%] text-xl rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-500"
+                  className="p-4 w-[70%]  rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-500"
                   placeholder="Password"
                   type="password"
                   onChange={(e: any) => setPassword(e.target.value)}

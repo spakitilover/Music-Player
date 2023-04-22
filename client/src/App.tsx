@@ -15,13 +15,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Main />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/albums" element={<Albums />} />
         <Route path="/albumsSongs/:id" element={<AlbumSongs />} />
         <Route path="/likedSongs" element={<LikedSongs />} />
-        <Route path="/login" element={<Login />} />
       </Routes>
       <Playlist />
     </div>

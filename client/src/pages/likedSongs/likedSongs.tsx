@@ -28,7 +28,7 @@ const LikedSongs = () => {
     <>
       <Sidebar />
       <Navbar />
-      <Playlist />
+
       <div className="flex bg-black">
         <div className="ml-[300px] mt-[130px] w-full">
           <div className="p-5 flex gap-10">
@@ -47,11 +47,14 @@ const LikedSongs = () => {
           <div className="text-white p-5">
             <div className="w-full h-[500px] bg-slate-800 bg-opacity-40  rounded-md p-5">
               {likesSongs.likes.map((item: any) => (
-                <ul className="flex w-full mb-3 bg-slate-800 bg-opacity-50 hover:bg-rose-900 duration-300 cursor-pointer p-2 rounded-md">
+                <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-1 rounded-sm">
                   <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
                     <PlayArrow />
-                    <div className="w-[40px] h-[40px] rounded-md overflow-hidden">
-                      <img className=" object-cover" src={item?.music?.image} />
+                    <div className="">
+                      <img
+                        className=" object-cover w-[40px] h-[40px] rounded-md flex justify-center items-center"
+                        src={item?.music?.image}
+                      />
                     </div>
                     <span className="font-[poppins] text-sm w-[50%]">
                       {item?.music?.song}
