@@ -30,7 +30,6 @@ const Albums = () => {
     <>
       <Sidebar />
       <Navbar />
-
       <div className="flex bg-black">
         <div className="ml-[300px] mt-[130px]">
           <div className="text-3xl font-['Russo_One'] text-rose-600 p-5 ">

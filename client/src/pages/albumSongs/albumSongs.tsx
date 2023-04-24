@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/navbar";
 import Playlist from "../../components/playlist/playlist";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import Favorite from "@mui/icons-material/Favorite";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addingLike, selectAlbum, selectSong } from "../../redux/musicSlice";
 import axios from "axios";
@@ -113,12 +113,12 @@ const AlbumSongs: React.FC = () => {
           </div>
 
           <div className="text-white p-5">
-            <div className="w-full h-[500px] bg-slate-800 bg-opacity-40  rounded-md p-5">
+            <div className="w-full h-[500px] bg-slate-800 bg-opacity-40 rounded-md p-5 overflow-scroll mb-16 ">
               {singleAlbum?.music.map((item: any) => (
-                <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-2 rounded-xl">
+                <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-1 rounded-md">
                   <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
                     <div
-                      className="p-2 bg-gray-900 rounded-md flex justify-center items-center hover:bg-gray-700 duration-200"
+                      className="p-2 bg-gray-900 rounded-full flex justify-center items-center hover:bg-rose-800 duration-200"
                       onClick={() => HandleSelectSong(item.id)}
                     >
                       <PlayArrow />
@@ -131,12 +131,12 @@ const AlbumSongs: React.FC = () => {
                       />
                     </div>
                     <span className="font-[poppins] text-sm w-[50%]">
-                      {item.song}
+                      {item.song.slice(0, 30)}....
                     </span>
                   </li>
                   <li className="text-white  w-[10%]">
                     <div className="h-[50px] flex justify-end items-center">
-                      <div className="font-[poppins] text-sm">
+                      <div className="font-[poppins] text-sm hover:text-green-600 duration-200">
                         {singleAlbum.name}
                       </div>
                     </div>
@@ -168,7 +168,7 @@ const AlbumSongs: React.FC = () => {
                           </div>
                         )}
 
-                        <div className="font-[poppins]">3 : 54</div>
+                        <div className="font-[poppins]">{item?.duration}</div>
                       </div>
                     </div>
                   </li>

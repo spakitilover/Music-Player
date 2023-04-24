@@ -51,8 +51,11 @@ const Intro = () => {
       <div className="w-[50vw] h-[300px] overflow-auto p-3">
         {Musics.map((item: any) => (
           <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-1 rounded-md">
-            <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
-              <PlayArrow />
+            <li className="text-white flex items-center gap-2  w-[45%]  ">
+              <div className="p-2 hover:bg-rose-800 duration-200 rounded-full">
+                <PlayArrow />
+              </div>
+
               <div className="">
                 <img
                   className="w-[40px] h-[40px] rounded-md  object-cover"
@@ -77,7 +80,7 @@ const Intro = () => {
                   <div className="text-slate-500 hover:text-rose-600 duration-300 ">
                     <Favorite className="" />
                   </div>
-                  <div className="font-[poppins]">3 : 54</div>
+                  <div className="font-[poppins]">{item?.duration}</div>
                 </div>
               </div>
             </li>

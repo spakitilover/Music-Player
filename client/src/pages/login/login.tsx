@@ -10,6 +10,7 @@ import { getAllMusic } from "../../redux/musicSlice";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [response, setResponse] = useState(false);
   const dispatch = useDispatch();
   const Navigate = useNavigate();
 
@@ -21,22 +22,19 @@ const Login = () => {
       })
       .then((res) => {
         Navigate("/home");
+        // decode a jwt Token before the insert
         dispatch(loginUser(jwtDecode(res.data.Token)));
+        // geting all musics after login
+        axios.get(`${process.env.REACT_APP_LOCALHOST}music`).then((res) => {
+          dispatch(getAllMusic(res.data));
+          // geting all albums after login
+          axios.get(`${process.env.REACT_APP_LOCALHOST}albums`).then((res) => {
+            dispatch(getAllAlbums(res.data));
+          });
+        });
       })
       .catch((err) => console.log(err));
   };
-
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_LOCALHOST}music`).then((res) => {
-      dispatch(getAllMusic(res.data));
-    });
-  }, []);
-
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_LOCALHOST}albums`).then((res) => {
-      dispatch(getAllAlbums(res.data));
-    });
-  }, []);
 
   return (
     <div className="h-screen  bg-slate-950 flex items-center">

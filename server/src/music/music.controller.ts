@@ -50,9 +50,10 @@ export class MusicController {
   create(
     @Param('id') id: number,
     @Body('image') image: string,
+    @Body('duration') duration: string,
     @UploadedFile('file') file: Express.Multer.File,
   ) {
-    return this.musicService.create(id, file.filename, image);
+    return this.musicService.create(id, file.filename, image, duration);
   }
 
   @Patch(':id')

@@ -13,15 +13,15 @@ const Profile = () => {
 
       <div className="flex bg-black">
         <div className="ml-[300px] mt-[130px] w-full p-5">
-          <div className="p-5 flex gap-10">
+          <div className="p-5 flex gap-5">
             <div className="">
               <img
-                className="w-[400px] h-[400px] rounded-full object-cover flex items-center justify-center"
+                className="w-[250px] h-[250px] rounded-full object-cover flex items-center justify-center"
                 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"
               />
             </div>
             <div className="flex items-center">
-              <span className="text-7xl font-[poppins] text-white">
+              <span className="text-5xl font-[poppins] text-white">
                 Tarik Kabaki
               </span>
             </div>

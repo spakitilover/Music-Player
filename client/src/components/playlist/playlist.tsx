@@ -11,8 +11,12 @@ import { useSelector } from "react-redux";
 import VolumeOff from "@mui/icons-material/VolumeOff";
 import MusicNote from "@mui/icons-material/MusicNote";
 import { useDispatch } from "react-redux";
-import { next, prev } from "../../redux/musicSlice";
+import { customPrev, next, prev } from "../../redux/musicSlice";
 import { singleAlbum } from "../../interface/singleAlbum";
+import { selectAlbum } from "../../redux/musicSlice";
+import { selectSong } from "../../redux/musicSlice";
+import { customNext } from "../../redux/musicSlice";
+import AlbumSongs from "../../pages/albumSongs/albumSongs";
 
 const Playlist = (songId: any): JSX.Element => {
   const audioElm = useRef<any>(null);
@@ -22,6 +26,7 @@ const Playlist = (songId: any): JSX.Element => {
   const [length, setLength] = useState(0);
   const [liveDuration, setLiveDuration] = useState("");
   const [volume, setVolume] = useState(1.0);
+  const dispatch = useDispatch();
   const singleAlbum = useSelector(
     (state: singleAlbum) => state.music.singleAlbum
   );
@@ -32,6 +37,16 @@ const Playlist = (songId: any): JSX.Element => {
   };
   const NextSong = () => {
     dispatch(next());
+    audioElm.current.currentTime = 0;
+  };
+
+  const CustomNext = () => {
+    dispatch(customNext());
+    audioElm.current.currentTime = 0;
+  };
+
+  const CustomPrev = () => {
+    dispatch(customPrev());
     audioElm.current.currentTime = 0;
   };
 
@@ -79,14 +94,15 @@ const Playlist = (songId: any): JSX.Element => {
     audioElm.current.volume = e;
   };
 
-  const dispatch = useDispatch();
-
   return (
     <>
-      <div className="border-t-[1px] bg-black flex items-center border-rose-900 h-[100px] w-full fixed bottom-0 z-40">
+      <div className="border-t-[1px] bg-black flex items-center border-rose-600 h-[100px] w-full fixed bottom-0 z-40">
         <audio
           ref={audioElm}
-          src={`${process.env.REACT_APP_LOCALHOST}music/${singleAlbum[0]?.music?.[curr]?.song}`}
+          src={`${process.env.REACT_APP_LOCALHOST}music/${
+            singleAlbum[0]?.music?.[curr]?.song ||
+            singleAlbum[curr]?.music?.song
+          }`}
           onTimeUpdate={onPlaying}
         />
         {singleAlbum.length < 1 ? (
@@ -105,18 +121,24 @@ const Playlist = (songId: any): JSX.Element => {
               <div className="">
                 <img
                   className="w-[70px] h-[70px] rounded-md  object-cover"
-                  src={singleAlbum[0]?.music[curr]?.image}
+                  src={
+                    singleAlbum[0]?.music[curr]?.image ||
+                    singleAlbum[curr]?.music.image
+                  }
                 />
               </div>
               <div className="p-5">
                 <div>
                   <span className="font-[poppins]">
-                    {singleAlbum[0]?.music[curr]?.song}
+                    {singleAlbum[0]?.music[curr]?.song?.slice(0, 30) ||
+                      singleAlbum[curr]?.music.song.slice(0, 30)}
+                    ....
                   </span>
                 </div>
                 <div>
                   <span className="text-slate-500 font-[poppins]">
-                    {singleAlbum[0]?.name}
+                    {singleAlbum[0]?.name ||
+                      singleAlbum[curr]?.music.albums.name}
                   </span>
                 </div>
               </div>
@@ -125,12 +147,22 @@ const Playlist = (songId: any): JSX.Element => {
             <div className="w-[40%] flex justify-center">
               <div>
                 <div className="flex justify-center gap-5">
-                  <div
-                    className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full "
-                    onClick={PrevSong}
-                  >
-                    <SkipPrevious style={{ fontSize: "40px" }} />
-                  </div>
+                  {singleAlbum[curr]?.users ? (
+                    <div
+                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full"
+                      onClick={CustomPrev}
+                    >
+                      <SkipPrevious style={{ fontSize: "40px" }} />
+                    </div>
+                  ) : (
+                    <div
+                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full"
+                      onClick={PrevSong}
+                    >
+                      <SkipPrevious style={{ fontSize: "40px" }} />
+                    </div>
+                  )}
+
                   {isPlaying ? (
                     <div className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full">
                       <Pause
@@ -147,12 +179,21 @@ const Playlist = (songId: any): JSX.Element => {
                     </div>
                   )}
 
-                  <div
-                    className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 p-1 hover:text-rose-500  rounded-full"
-                    onClick={NextSong}
-                  >
-                    <SkipNext style={{ fontSize: "40px" }} />
-                  </div>
+                  {singleAlbum[curr]?.users ? (
+                    <div
+                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 p-1 hover:text-rose-500  rounded-full"
+                      onClick={CustomNext}
+                    >
+                      <SkipNext style={{ fontSize: "40px" }} />
+                    </div>
+                  ) : (
+                    <div
+                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 p-1 hover:text-rose-500  rounded-full"
+                      onClick={NextSong}
+                    >
+                      <SkipNext style={{ fontSize: "40px" }} />
+                    </div>
+                  )}
                 </div>
                 <div className="w-[30vw] flex items-center gap-5">
                   <div className="text-sm font-[poppins] text-slate-500">
@@ -174,7 +215,7 @@ const Playlist = (songId: any): JSX.Element => {
             </div>
 
             <div className=" gap-3 w-[30%] flex justify-end">
-              <div className="w-[150px] flex gap-3 items-center">
+              <div className="w-[130px] flex gap-3 items-center">
                 {volume < 0.01 ? <VolumeOff /> : <VolumeUp />}
                 <Slider
                   size="small"
@@ -184,12 +225,6 @@ const Playlist = (songId: any): JSX.Element => {
                   aria-label="Small"
                   onChange={(e: any) => handleVolume(e.target.value)}
                 />
-              </div>
-              <div>
-                <FavoriteBorder />
-              </div>
-              <div>
-                <StarBorder />
               </div>
             </div>
           </div>

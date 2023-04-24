@@ -46,14 +46,18 @@ export class MusicService {
     return await this.musicRepo.save({ ...music, image });
   }
 
-  async create(id: number, file: string, image: string) {
+  async create(id: number, file: string, image: string, duration: string) {
     const album = await this.albumRepo.findOne({
       where: { id: id },
     });
 
     await this.albumRepo.save(album);
 
-    const music = await this.musicRepo.create({ song: file, image: image });
+    const music = await this.musicRepo.create({
+      song: file,
+      image: image,
+      duration: duration,
+    });
 
     music.albums = album;
 

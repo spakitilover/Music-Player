@@ -25,8 +25,14 @@ export const MusicSlice = createSlice({
       );
       // clearing the array after insert another album !
       state.singleAlbum = [];
-
+      state.curr = 0;
       state.singleAlbum.push(...album);
+    },
+
+    customAlbums: (state: any, action) => {
+      state.singleAlbum = [];
+      state.curr = 0;
+      state.singleAlbum.push(...action.payload);
     },
 
     next: (state: any) => {
@@ -39,6 +45,20 @@ export const MusicSlice = createSlice({
       const isFirstSlide = state.curr === 0;
       const newI = isFirstSlide
         ? state.singleAlbum[0]?.music?.length - 1
+        : state.curr - 1;
+      state.curr = newI;
+    },
+
+    customNext: (state: any) => {
+      const isLast = state.curr === state.singleAlbum?.length - 1;
+      const newI = isLast ? 0 : state.curr + 1;
+      state.curr = newI;
+    },
+
+    customPrev: (state: any) => {
+      const isFirstSlide = state.curr === 0;
+      const newI = isFirstSlide
+        ? state.singleAlbum?.length - 1
         : state.curr - 1;
       state.curr = newI;
     },
@@ -77,6 +97,14 @@ export const MusicSlice = createSlice({
           1
         );
     },
+
+    logOut: (state: any) => {
+      state.curr = 0;
+      state.singleSong = [];
+      state.singleAlbum = [];
+      state.Album = [];
+      state.Music = [];
+    },
   },
 });
 
@@ -89,6 +117,10 @@ export const {
   selectSong,
   addingLike,
   removeLikes,
+  logOut,
+  customAlbums,
+  customNext,
+  customPrev,
 } = MusicSlice.actions;
 
 export default MusicSlice.reducer;

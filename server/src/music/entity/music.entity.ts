@@ -23,6 +23,9 @@ export class Music {
   @Column({ nullable: true })
   image: string;
 
+  @Column({ nullable: true })
+  duration: string;
+
   @ManyToOne(() => Albums, (albums) => albums.music)
   albums: Albums;
 
