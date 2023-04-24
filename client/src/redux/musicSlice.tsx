@@ -77,6 +77,15 @@ export const MusicSlice = createSlice({
       state.curr = SelectedSongId;
     },
 
+    selectCustom: (state: any, action) => {
+      state.singleAlbum = [];
+      state.singleAlbum.push(...action.payload.likes);
+      const findSelectedSong = state.singleAlbum.findIndex(
+        (itm: any) => itm.id === action.payload.songId
+      );
+      state.curr = findSelectedSong;
+    },
+
     addingLike: (state: any, action) => {
       state.Album.find((it: any) => it.id === action.payload.music.albums.id)
         .music.find((item: any) => item.id === action.payload.music.id)
@@ -121,6 +130,7 @@ export const {
   customAlbums,
   customNext,
   customPrev,
+  selectCustom,
 } = MusicSlice.actions;
 
 export default MusicSlice.reducer;

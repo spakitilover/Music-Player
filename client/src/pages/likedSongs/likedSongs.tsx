@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeUserLike } from "../../redux/usersSlice";
-import { removeLikes } from "../../redux/musicSlice";
+import { removeLikes, selectCustom } from "../../redux/musicSlice";
 import { selectAlbum } from "../../redux/musicSlice";
 import { customAlbums } from "../../redux/musicSlice";
 
@@ -30,6 +30,10 @@ const LikedSongs = () => {
     dispatch(customAlbums(likesSongs?.likes));
   };
 
+  const handleSelectSong = (item: any) => {
+    dispatch(selectCustom({ likes: likesSongs?.likes, songId: item?.id }));
+  };
+
   return (
     <>
       <Sidebar />
@@ -43,7 +47,7 @@ const LikedSongs = () => {
                 src="https://preview.redd.it/rnqa7yhv4il71.jpg?width=640&crop=smart&auto=webp&s=819eb2bda1b35c7729065035a16e81824132e2f1"
               />
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-5">
               <span className="text-8xl  text-white font-['Russo_One'] ">
                 Liked Songs
               </span>
@@ -60,7 +64,10 @@ const LikedSongs = () => {
               {likesSongs.likes.map((item: any) => (
                 <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-1 rounded-md">
                   <li className="text-white flex items-center gap-2 w-[45%]">
-                    <div className="hover:bg-rose-800 duration-200 p-2 rounded-full">
+                    <div
+                      onClick={() => handleSelectSong(item)}
+                      className="hover:bg-rose-800 duration-200 p-2 rounded-full"
+                    >
                       <PlayArrow />
                     </div>
 
