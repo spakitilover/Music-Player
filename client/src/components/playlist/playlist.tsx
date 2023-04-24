@@ -104,6 +104,7 @@ const Playlist = (songId: any): JSX.Element => {
             singleAlbum[curr]?.music?.song
           }`}
           onTimeUpdate={onPlaying}
+          onEnded={() => (singleAlbum[curr]?.users ? CustomNext() : NextSong())}
         />
         {singleAlbum.length < 1 ? (
           <div className="text-white flex items-center justify-center w-full p-10 gap-3">

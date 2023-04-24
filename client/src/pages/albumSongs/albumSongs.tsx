@@ -100,7 +100,7 @@ const AlbumSongs: React.FC = () => {
               <img className="object-cover" src={singleAlbum?.image} />
             </div>
             <div className="flex items-center gap-5">
-              <span className="text-5xl font-[poppins] text-white">
+              <span className="text-6xl font-['Russo_One'] text-white">
                 {singleAlbum?.name}
               </span>
               <div
