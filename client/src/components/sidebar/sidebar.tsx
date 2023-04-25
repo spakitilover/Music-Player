@@ -16,7 +16,7 @@ const Sidebar = () => {
     <div className="h-full w-[300px] fixed bg-black z-30 mt-[100px]">
       <div className="my-10">
         <div className="flex justify-center mb-3">
-          {CurrentUser.image === null ? (
+          {CurrentUser?.image === null ? (
             <img
               className="w-[80px] h-[80px] object-cover rounded-full"
               src={

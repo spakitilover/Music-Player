@@ -28,67 +28,97 @@ const Intro = () => {
   }, []);
 
   return (
-    <div className="p-5 w-full ml-[300px] mt-[100px]">
+    <div className="p-5 w-full ml-[300px] mt-[120px]">
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">
         Albums
       </div>
       <div className="flex flex-wrap gap-10  ">
         {albums.map((item) => (
           <div>
-            <div className="w-[200px] h-[200px] overflow-hidden rounded-md  ">
+            <div className="w-[200px] h-[200px] overflow-hidden rounded-md border-b-2 border-rose-500 ">
               <Link to={`/albumsSongs/${item.id}`}>
                 <img
-                  className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300"
+                  className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300 "
                   src={item.image}
                 />
               </Link>
             </div>
-            <div className="text-white p-3 font-[poppins]">{item.name}</div>
+            <div className="text-white p-2 font-['Russo_One']">{item.name}</div>
           </div>
         ))}
       </div>
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
-      <div className="w-[50vw] h-[300px] overflow-auto p-3">
-        {Musics.map((item: any) => (
-          <div>
-            <ul className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-2 ">
-              <li className="text-white flex items-center gap-2  w-[45%]  ">
-                <div className="p-2 hover:bg-rose-800 duration-200 rounded-full">
-                  <PlayArrow />
-                </div>
+      <div className="flex">
+        <div className="w-[70%] h-[300px] overflow-auto p-3">
+          {Musics.map((item: any) => (
+            <div>
+              <ul className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-2 ">
+                <li className="text-white flex items-center gap-2  w-[45%]  ">
+                  <div className="p-2 hover:bg-rose-800 duration-200 rounded-full">
+                    <PlayArrow />
+                  </div>
 
-                <div className="">
-                  <img
-                    className="w-[40px] h-[40px] rounded-md  object-cover"
-                    src={item.image}
-                  />
-                </div>
-                <span className="font-[poppins] text-sm w-[50%]">
-                  {item.song.slice(0, 18)}...
-                </span>
-              </li>
-              <li className="text-white  w-[10%]">
-                <div className="h-[50px] flex justify-end items-center">
-                  <div className="font-[poppins] text-sm">
-                    {" "}
-                    {item.albums.name}
+                  <div className="">
+                    <img
+                      className="w-[40px] h-[40px] rounded-md  object-cover"
+                      src={item.image}
+                    />
                   </div>
-                </div>
-              </li>
-              <li className="text-white w-[45%] mr-2">
-                <div className="h-[50px] flex justify-end items-center">
-                  <div className="font-[poppins] text-sm gap-5 flex items-center">
-                    <div className="text-slate-500 hover:text-rose-600 duration-300 ">
-                      <Favorite className="" />
+                  <span className="font-[poppins] text-sm w-[50%]">
+                    {item.song.slice(0, 18)}...
+                  </span>
+                </li>
+                <li className="text-white  w-[10%]">
+                  <div className="h-[50px] flex justify-end items-center">
+                    <div className="font-[poppins] text-sm">
+                      {" "}
+                      {item.albums.name}
                     </div>
-                    <div className="font-[poppins]">{item?.duration}</div>
+                  </div>
+                </li>
+                <li className="text-white w-[45%] mr-2">
+                  <div className="h-[50px] flex justify-end items-center">
+                    <div className="font-[poppins] text-sm gap-5 flex items-center">
+                      <div className="text-slate-500 hover:text-rose-600 duration-300 ">
+                        <Favorite className="" />
+                      </div>
+                      <div className="font-[poppins]">{item?.duration}</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <hr className="border-rose-950 " />
+            </div>
+          ))}
+        </div>
+
+        <div className="w-[30%] p-5">
+          <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">
+            Most Likes Songs
+          </div>
+          <div className="text-white gap-5  p-5">
+            <div className="flex gap-5">
+              <img
+                className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300 rounded-md w-[130px] h-[130px]"
+                src={
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-PcZG7yNJuD7iGig5-jQ_k0-O8uXIayZZugvbELlpwg&s"
+                }
+              />
+              <div>
+                <div className="font-['Russo_One'] text-md p-1">T-FLOW</div>
+                <div className="font-['Russo_One'] text-md p-1">
+                  T.flow BRM BRM BRM...
+                </div>
+                <div className="text-rose-600 p-1 gap-1 flex items-center  ">
+                  <div>88K</div>
+                  <div>
+                    <Favorite />
                   </div>
                 </div>
-              </li>
-            </ul>
-            <hr className="border-rose-900 " />
+              </div>
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

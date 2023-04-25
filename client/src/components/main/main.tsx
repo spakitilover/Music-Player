@@ -19,20 +19,20 @@ const Main = () => {
             />
           </div>
         </div>
-        <div className="flex-1 flex justify-center items-center">
+        <div className="flex-1 flex justify-center items-center my-10">
           <div className="w-full h-full  flex items-center justify-center ">
             <div className="">
               <div className=" flex justify-center items-center my-10">
-                <span className="text-6xl text-center font-['Russo_One']">
+                <span className="lg:text-6xl md:text-6xl text-5xl text-center font-['Russo_One']">
                   MUSIC FOR EVERYONE
                 </span>
               </div>
               <div className="flex justify-center items-center my-5">
-                <p className="text-2xl text-slate-100 text-center font-[poppins]">
+                <p className="lg:text-2xl md:text-2xl text-md text-slate-100 text-center font-[poppins]">
                   Without Music , Life would be a mistake
                 </p>
               </div>
-              <div className=" flex justify-center items-center ">
+              <div className=" flex justify-center items-center">
                 <Link to={"/login"}>
                   <button className="p-5 bg-slate-800 text-white w-[300px] rounded-md font-['Press_Start_2P'] hover:text-rose-600 duration-300">
                     START LISTENING

@@ -12,6 +12,7 @@ import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import LoginLayout from "./layout/loginLayout/loginLayout";
 import AppLayout from "./layout/appLayout/appLayout";
+import Section from "./pages/register/section";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Section/:id" element={<Section />} />
       </Routes>
       <Playlist />
     </div>

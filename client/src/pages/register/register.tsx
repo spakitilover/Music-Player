@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import ArrowBackOutlined from "@mui/icons-material/ArrowBackOutlined";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = () => {
     axios
@@ -17,7 +19,10 @@ const Register: React.FC = () => {
         email,
         password,
       })
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        console.log(res.data);
+        navigate(`/section/${res.data.id}`);
+      })
       .catch((err) => console.log(err));
   };
 
