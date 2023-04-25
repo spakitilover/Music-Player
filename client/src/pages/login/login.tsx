@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { loginUser } from "../../redux/usersSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllAlbums } from "../../redux/musicSlice";
 import { getAllMusic } from "../../redux/musicSlice";
 
@@ -37,9 +37,9 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen  bg-slate-950 flex items-center">
+    <div className="h-[936px] bg-slate-950 flex items-center z-[999] relative">
       <div className="w-full">
-        <div className="text-6xl font-['Pacifico'] w-full text-rose-600 flex justify-center mb-5">
+        <div className="lg:text-6xl md:text-6xl text-4xl font-['Russo_One'] w-full text-rose-500 flex justify-center mb-5">
           Kabaki Music
         </div>
         <div className="flex justify-center items-center h-full">
@@ -61,14 +61,14 @@ const Login = () => {
             <div>
               <div className="w-full flex justify-center mb-5 ">
                 <input
-                  className="p-4 w-[70%] rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-500"
+                  className="p-4 w-[60%] rounded-full bg-inherit border-2 border-white text-rose-400 focus:outline-none font-['poppins'] placeholder:text-gray-500"
                   placeholder="Username"
                   onChange={(e: any) => setUsername(e.target.value)}
                 />
               </div>
               <div className="w-full flex justify-center">
                 <input
-                  className="p-4 w-[70%]  rounded-full bg-slate-200 focus:outline-none font-['poppins'] placeholder:text-gray-500"
+                  className="p-4 w-[60%] rounded-full bg-inherit border-2 border-white  text-rose-400 focus:outline-none font-['poppins'] placeholder:text-gray-500"
                   placeholder="Password"
                   type="password"
                   onChange={(e: any) => setPassword(e.target.value)}
@@ -78,15 +78,18 @@ const Login = () => {
             <div className="my-10 w-full flex justify-center">
               <button
                 onClick={handleLogin}
-                className="p-3 w-[50%] rounded-full bg-white border-black border-2 font-['Pacifico']"
+                className="p-3 w-[50%] rounded-full border-white text-white border-2 font-['poppins'] hover:border-green-500 duration-300"
               >
                 LOGIN
               </button>
             </div>
+
             <div className="my-10 w-full flex justify-center">
-              <span className="text-slate-200 font-['Press_Start_2P']">
-                REGISTER
-              </span>
+              <Link to={"/register"}>
+                <span className="text-slate-200 font-['poppins'] hover:text-rose-600 duration-300 cursor-pointer">
+                  REGISTER
+                </span>
+              </Link>
             </div>
           </div>
         </div>

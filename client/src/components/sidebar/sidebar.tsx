@@ -6,27 +6,40 @@ import LibraryMusicOutlined from "@mui/icons-material/LibraryMusicOutlined";
 import CottageOutlined from "@mui/icons-material/CottageOutlined";
 import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { current } from "@reduxjs/toolkit";
 
 const Sidebar = () => {
+  const CurrentUser = useSelector((state: any) => state.users.CurrentUser);
+
   return (
     <div className="h-full w-[300px] fixed bg-black z-30 mt-[100px]">
       <div className="my-10">
         <div className="flex justify-center mb-3">
-          <img
-            className="w-[80px] h-[80px] object-cover rounded-full"
-            src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?cs=srgb&dl=pexels-stefan-stefancik-91227.jpg&fm=jpg"
-          />
+          {CurrentUser.image === null ? (
+            <img
+              className="w-[80px] h-[80px] object-cover rounded-full"
+              src={
+                "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
+              }
+            />
+          ) : (
+            <img
+              className="w-[80px] h-[80px] object-cover rounded-full"
+              src={CurrentUser?.image}
+            />
+          )}
         </div>
         <div className="flex justify-center">
           <Link to={"/profile"}>
             <span className="font-['Poppins'] text-white hover:underline cursor-pointer">
-              Tarik Kabaki
+              {CurrentUser?.fullname}
             </span>
           </Link>
         </div>
         <div className="flex justify-center">
           <span className="text-slate-500 font-['Poppins']">
-            Full stack Developer
+            {CurrentUser?.username}
           </span>
         </div>
       </div>

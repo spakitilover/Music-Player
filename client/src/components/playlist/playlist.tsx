@@ -18,7 +18,7 @@ import { selectSong } from "../../redux/musicSlice";
 import { customNext } from "../../redux/musicSlice";
 import AlbumSongs from "../../pages/albumSongs/albumSongs";
 
-const Playlist = (songId: any): JSX.Element => {
+const Playlist = () => {
   const audioElm = useRef<any>(null);
   const Click = useRef<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -96,7 +96,7 @@ const Playlist = (songId: any): JSX.Element => {
 
   return (
     <>
-      <div className="border-t-[1px] bg-black flex items-center border-rose-600 h-[100px] w-full fixed bottom-0 z-40">
+      <div className="border-t-[1px] bg-black flex items-center h-[100px] w-full fixed bottom-0 z-40">
         <audio
           ref={audioElm}
           src={`${process.env.REACT_APP_LOCALHOST}music/${

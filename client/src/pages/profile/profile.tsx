@@ -4,25 +4,33 @@ import Navbar from "../../components/navbar/navbar";
 import Playlist from "../../components/playlist/playlist";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const CurrentUser = useSelector((state: any) => state.users.CurrentUser);
   return (
     <>
       <Sidebar />
       <Navbar />
-
       <div className="flex bg-black">
         <div className="ml-[300px] mt-[130px] w-full p-5">
           <div className="p-5 flex gap-5">
             <div className="">
-              <img
-                className="w-[250px] h-[250px] rounded-full object-cover flex items-center justify-center"
-                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-              />
+              {CurrentUser.image === null ? (
+                <img
+                  className="w-[250px] h-[250px] rounded-full object-cover flex items-center justify-center"
+                  src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
+                />
+              ) : (
+                <img
+                  className="w-[250px] h-[250px] rounded-full object-cover flex items-center justify-center"
+                  src={CurrentUser.image}
+                />
+              )}
             </div>
             <div className="flex items-center">
               <span className="text-5xl font-[poppins] text-white">
-                Tarik Kabaki
+                {CurrentUser.fullname}
               </span>
             </div>
           </div>
@@ -54,7 +62,6 @@ const Profile = () => {
                 Upload Your Profile Image
               </span>
             </div>
-
             <div className="p-5 mb-24">
               <button className="p-4 text-white bg-gray-700 bg-opacity-40 rounded-md w-[250px]">
                 UPDATE

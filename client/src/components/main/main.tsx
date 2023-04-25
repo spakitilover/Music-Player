@@ -9,12 +9,12 @@ const Main = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className=" h-screen w-full bg-orange-400">
-      <div className="flex h-full ">
-        <div className="flex-1 flex justify-center items-center bubble ">
+    <div className="h-[936px] w-full bg-orange-400 z-[999] relative">
+      <div className="lg:flex h-full">
+        <div className="flex-1 flex justify-center items-center bg-rose-500">
           <div className="w-full h-full flex justify-center items-center">
             <img
-              className="w-[800px] h-[800px] z-10 object-contain"
+              className="lg:w-[800px] lg:h-[800px] w-[500px] h-[500px] z-10 object-contain p-5"
               src="https://creazilla-store.fra1.digitaloceanspaces.com/emojis/52746/headphone-emoji-clipart-xl.png"
             />
           </div>

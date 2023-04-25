@@ -50,41 +50,44 @@ const Intro = () => {
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
       <div className="w-[50vw] h-[300px] overflow-auto p-3">
         {Musics.map((item: any) => (
-          <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-1 rounded-md">
-            <li className="text-white flex items-center gap-2  w-[45%]  ">
-              <div className="p-2 hover:bg-rose-800 duration-200 rounded-full">
-                <PlayArrow />
-              </div>
+          <div>
+            <ul className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-2 ">
+              <li className="text-white flex items-center gap-2  w-[45%]  ">
+                <div className="p-2 hover:bg-rose-800 duration-200 rounded-full">
+                  <PlayArrow />
+                </div>
 
-              <div className="">
-                <img
-                  className="w-[40px] h-[40px] rounded-md  object-cover"
-                  src={item.image}
-                />
-              </div>
-              <span className="font-[poppins] text-sm w-[50%]">
-                {item.song.slice(0, 18)}...
-              </span>
-            </li>
-            <li className="text-white  w-[10%]">
-              <div className="h-[50px] flex justify-end items-center">
-                <div className="font-[poppins] text-sm">
-                  {" "}
-                  {item.albums.name}
+                <div className="">
+                  <img
+                    className="w-[40px] h-[40px] rounded-md  object-cover"
+                    src={item.image}
+                  />
                 </div>
-              </div>
-            </li>
-            <li className="text-white w-[45%] mr-2">
-              <div className="h-[50px] flex justify-end items-center">
-                <div className="font-[poppins] text-sm gap-5 flex items-center">
-                  <div className="text-slate-500 hover:text-rose-600 duration-300 ">
-                    <Favorite className="" />
+                <span className="font-[poppins] text-sm w-[50%]">
+                  {item.song.slice(0, 18)}...
+                </span>
+              </li>
+              <li className="text-white  w-[10%]">
+                <div className="h-[50px] flex justify-end items-center">
+                  <div className="font-[poppins] text-sm">
+                    {" "}
+                    {item.albums.name}
                   </div>
-                  <div className="font-[poppins]">{item?.duration}</div>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+              <li className="text-white w-[45%] mr-2">
+                <div className="h-[50px] flex justify-end items-center">
+                  <div className="font-[poppins] text-sm gap-5 flex items-center">
+                    <div className="text-slate-500 hover:text-rose-600 duration-300 ">
+                      <Favorite className="" />
+                    </div>
+                    <div className="font-[poppins]">{item?.duration}</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <hr className="border-rose-900 " />
+          </div>
         ))}
       </div>
     </div>

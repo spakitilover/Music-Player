@@ -92,7 +92,7 @@ const AlbumSongs: React.FC = () => {
     <>
       <Sidebar />
       <Navbar />
-      <Playlist songId={songId} />
+
       <div className="flex bg-black">
         <div className="ml-[300px] mt-[130px] w-full">
           <div className="p-5 flex gap-10">
@@ -113,66 +113,70 @@ const AlbumSongs: React.FC = () => {
           </div>
 
           <div className="text-white p-5">
-            <div className="w-full h-[500px] bg-slate-800 bg-opacity-40 rounded-md p-5 overflow-scroll mb-16 ">
+            <div className="w-full h-[500px] bg-slate-800 bg-opacity-30 rounded-md overflow-scroll mb-16 ">
               {singleAlbum?.music.map((item: any) => (
-                <ul className="flex w-full mb-3 bg-slate-900 hover:bg-opacity-70 duration-300 cursor-pointer p-1 rounded-md">
-                  <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
-                    <div
-                      className="p-2 bg-gray-900 rounded-full flex justify-center items-center hover:bg-rose-800 duration-200"
-                      onClick={() => HandleSelectSong(item.id)}
-                    >
-                      <PlayArrow />
-                    </div>
-
-                    <div className="">
-                      <img
-                        className=" object-cover w-[40px] h-[40px] rounded-md "
-                        src={item?.image}
-                      />
-                    </div>
-                    <span className="font-[poppins] text-sm w-[50%]">
-                      {item.song.slice(0, 30)}....
-                    </span>
-                  </li>
-                  <li className="text-white  w-[10%]">
-                    <div className="h-[50px] flex justify-end items-center">
-                      <div className="font-[poppins] text-sm hover:text-green-600 duration-200">
-                        {singleAlbum.name}
+                <div>
+                  <ul className="flex w-full  hover:bg-opacity-70 hover:bg-rose-900 duration-300 cursor-pointer p-2 ">
+                    <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
+                      <div
+                        className="p-2 rounded-full flex justify-center items-center hover:bg-rose-800 duration-200"
+                        onClick={() => HandleSelectSong(item.id)}
+                      >
+                        <PlayArrow />
                       </div>
-                    </div>
-                  </li>
-                  <li className="text-white w-[45%]">
-                    <div className="h-[50px] flex justify-end items-center">
-                      <div className="font-[poppins] text-sm gap-5 flex items-center">
-                        {item.like
-                          ?.map((it: any) => it.users.id)
-                          .includes(CurrentUser.id) ? (
-                          <div
-                            className="text-rose-600"
-                            onClick={() =>
-                              removeLike(
-                                item.like.find(
-                                  (itm: any) => itm.users.id === CurrentUser.id
+
+                      <div className="">
+                        <img
+                          className=" object-cover w-[40px] h-[40px] rounded-md "
+                          src={item?.image}
+                        />
+                      </div>
+                      <span className="font-[poppins] text-sm w-[50%]">
+                        {item.song.slice(0, 30)}....
+                      </span>
+                    </li>
+                    <li className="text-white  w-[10%]">
+                      <div className="h-[50px] flex justify-end items-center">
+                        <div className="font-[poppins] text-sm hover:text-green-600 duration-200">
+                          {singleAlbum.name}
+                        </div>
+                      </div>
+                    </li>
+                    <li className="text-white w-[45%]">
+                      <div className="h-[50px] flex justify-end items-center">
+                        <div className="font-[poppins] text-sm gap-5 flex items-center">
+                          {item.like
+                            ?.map((it: any) => it.users.id)
+                            .includes(CurrentUser.id) ? (
+                            <div
+                              className="text-rose-600"
+                              onClick={() =>
+                                removeLike(
+                                  item.like.find(
+                                    (itm: any) =>
+                                      itm.users.id === CurrentUser.id
+                                  )
                                 )
-                              )
-                            }
-                          >
-                            <Favorite className="" />
-                          </div>
-                        ) : (
-                          <div
-                            className="text-slate-500 hover:text-rose-600 duration-300"
-                            onClick={() => handleLike(item.id)}
-                          >
-                            <Favorite className="" />
-                          </div>
-                        )}
+                              }
+                            >
+                              <Favorite className="" />
+                            </div>
+                          ) : (
+                            <div
+                              className=" text-slate-500 hover:text-rose-600 duration-300"
+                              onClick={() => handleLike(item.id)}
+                            >
+                              <Favorite className="" />
+                            </div>
+                          )}
 
-                        <div className="font-[poppins]">{item?.duration}</div>
+                          <div className="font-[poppins]">{item?.duration}</div>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                </ul>
+                    </li>
+                  </ul>
+                  <hr className="border-rose-900" />
+                </div>
               ))}
             </div>
           </div>
