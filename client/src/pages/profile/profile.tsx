@@ -18,13 +18,13 @@ const Profile = () => {
             <div className="">
               {CurrentUser.image === null ? (
                 <img
-                  className="w-[250px] h-[250px] rounded-full object-cover flex items-center justify-center"
-                  src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
+                  className="w-[250px] h-[250px] bg-slate-700 rounded-full object-cover flex items-center justify-center"
+                  src="https://img.freepik.com/free-icon/user_318-552176.jpg"
                 />
               ) : (
                 <img
                   className="w-[250px] h-[250px] rounded-full object-cover flex items-center justify-center"
-                  src={CurrentUser.image}
+                  src={`${process.env.REACT_APP_LOCALHOST}users/${CurrentUser?.image}`}
                 />
               )}
             </div>

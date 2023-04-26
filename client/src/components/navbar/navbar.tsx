@@ -21,14 +21,18 @@ const Navbar = () => {
     <div className="w-full top-0 fixed bg-black z-50">
       <div className="flex items-center">
         <div className="w-full p-10 flex  items-center">
-          <div className=" text-4xl font-['Russo_One'] w-full text-rose-600">
-            Kabaki Music
+          <div className="flex items-center gap-2  w-full text-rose-600">
+            <span className="text-4xl font-['Russo_One']">Kabaki Music </span>
+            <img
+              className="w-[40px] h-[40px]"
+              src="https://cdn-icons-png.flaticon.com/512/882/882634.png"
+            />
           </div>
           <div className="gap-5 flex items-center">
             <SearchModel />
             <span
               onClick={handleLogout}
-              className="text-white cursor-pointer bg-rose-600 hover:bg-rose-900 duration-200 p-2 rounded-full flex items-center justify-center"
+              className="cursor-pointer bg-yellow-500 hover:text-rose-600 duration-200 p-2 rounded-full flex items-center justify-center"
             >
               <Logout />
             </span>

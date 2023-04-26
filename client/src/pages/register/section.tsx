@@ -20,10 +20,8 @@ const Section = () => {
         </div>
         <div className="flex justify-center mb-10">
           <img
-            className="w-[250px] h-[250px] object-cover rounded-full"
-            src={
-              "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
-            }
+            className="w-[250px] h-[250px] object-cover rounded-full bg-slate-700"
+            src={"https://img.freepik.com/free-icon/user_318-552176.jpg"}
           />
         </div>
         <div className="flex justify-center mb-10 ">

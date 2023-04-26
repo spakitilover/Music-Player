@@ -12,6 +12,11 @@ const Intro = () => {
   const [albums, setAlbums] = useState<Albums[]>([]);
   const dispatch = useDispatch();
   const Musics = useSelector((state: any) => state.music.Music);
+  const songsLikesLength = Musics.map((i: any) => i.like.length);
+  const MaxSongLikesValue = Math.max(...songsLikesLength);
+  const MostLikedSong = Musics.find(
+    (i: any) => i.like.length === MaxSongLikesValue
+  );
 
   interface Albums {
     id: number;
@@ -94,23 +99,26 @@ const Intro = () => {
 
         <div className="w-[30%] p-5">
           <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">
-            Most Likes Songs
+            Most Likes Song!
           </div>
           <div className="text-white gap-5  p-5">
             <div className="flex gap-5">
-              <img
-                className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300 rounded-md w-[130px] h-[130px]"
-                src={
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-PcZG7yNJuD7iGig5-jQ_k0-O8uXIayZZugvbELlpwg&s"
-                }
-              />
+              <Link to={`/albumsSongs/${MostLikedSong?.albums?.id}`}>
+                <img
+                  className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300 rounded-md w-[130px] h-[130px]"
+                  src={MostLikedSong?.image}
+                />
+              </Link>
+
               <div>
-                <div className="font-['Russo_One'] text-md p-1">T-FLOW</div>
-                <div className="font-['Russo_One'] text-md p-1">
-                  T.flow BRM BRM BRM...
+                <div className="font-['poppins'] text-md text-slate-400 p-1">
+                  {MostLikedSong?.albums?.name}
+                </div>
+                <div className="font-['poppins'] text-md p-1">
+                  {MostLikedSong?.song.slice(0, 30)}
                 </div>
                 <div className="text-rose-600 p-1 gap-1 flex items-center  ">
-                  <div>88K</div>
+                  <div>{MostLikedSong?.like?.length}</div>
                   <div>
                     <Favorite />
                   </div>

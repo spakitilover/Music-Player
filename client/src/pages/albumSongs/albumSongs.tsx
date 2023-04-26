@@ -144,12 +144,12 @@ const AlbumSongs: React.FC = () => {
                     </li>
                     <li className="text-white w-[45%]">
                       <div className="h-[50px] flex justify-end items-center">
-                        <div className="font-[poppins] text-sm gap-5 flex items-center">
+                        <div className="font-[poppins] text-sm  flex items-center">
                           {item.like
                             ?.map((it: any) => it.users.id)
                             .includes(CurrentUser.id) ? (
                             <div
-                              className="text-rose-600"
+                              className="text-rose-600 w-[30px]"
                               onClick={() =>
                                 removeLike(
                                   item.like.find(
@@ -163,14 +163,15 @@ const AlbumSongs: React.FC = () => {
                             </div>
                           ) : (
                             <div
-                              className=" text-slate-500 hover:text-rose-600 duration-300"
+                              className=" text-slate-500 hover:text-rose-600 duration-300 w-[30px]"
                               onClick={() => handleLike(item.id)}
                             >
                               <Favorite className="" />
                             </div>
                           )}
-
-                          <div className="font-[poppins]">{item?.duration}</div>
+                        </div>
+                        <div className="font-[poppins] w-[50px]  flex justify-center">
+                          {item?.duration}
                         </div>
                       </div>
                     </li>

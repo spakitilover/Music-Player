@@ -56,7 +56,11 @@ export class UsersService {
 
   async create(usersDto: UsersDto) {
     /* const ExistingUser = await this.usersRepo.findOne({
-      where: { username: usersDto.username },
+      where: {
+        username: usersDto.username,
+        fullname: usersDto.fullname,
+        email: usersDto.email,
+      },
     });
 
     if (ExistingUser.username || ExistingUser.fullname || ExistingUser.email) {

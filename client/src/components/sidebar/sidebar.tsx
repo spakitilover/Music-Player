@@ -18,15 +18,13 @@ const Sidebar = () => {
         <div className="flex justify-center mb-3">
           {CurrentUser?.image === null ? (
             <img
-              className="w-[80px] h-[80px] object-cover rounded-full"
-              src={
-                "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
-              }
+              className="w-[80px] h-[80px] object-cover rounded-full bg-slate-700"
+              src={"https://img.freepik.com/free-icon/user_318-552176.jpg"}
             />
           ) : (
             <img
               className="w-[80px] h-[80px] object-cover rounded-full"
-              src={CurrentUser?.image}
+              src={`${process.env.REACT_APP_LOCALHOST}users/${CurrentUser?.image}`}
             />
           )}
         </div>

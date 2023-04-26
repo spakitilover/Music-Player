@@ -92,13 +92,13 @@ const LikedSongs = () => {
                     </li>
                     <li className="text-white w-[45%] mr-[5px]">
                       <div className="h-[50px] flex justify-end items-center">
-                        <div className="font-[poppins] text-sm gap-5 flex items-center">
+                        <div className="font-[poppins] text-sm w-[30px] flex items-center">
                           <div className="" onClick={() => removeLike(item.id)}>
                             <Favorite className="text-rose-600" />
                           </div>
-                          <div className="font-[poppins]">
-                            {item?.music?.duration}
-                          </div>
+                        </div>
+                        <div className="font-[poppins] w-[50px] flex justify-center">
+                          {item?.music?.duration}
                         </div>
                       </div>
                     </li>
