@@ -9,9 +9,20 @@ const Register: React.FC = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [fullErr, setFullErr] = useState(false);
+  const [userErr, setUserErr] = useState(false);
+  const [emailErr, setEmailErr] = useState(false);
+  const [passErr, setPassErr] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = () => {
+    if (fullname.length < 5) {
+      setFullErr(true);
+    } else {
+      return null;
+    }
+
     axios
       .post(`${process.env.REACT_APP_LOCALHOST}users/create`, {
         fullname,
@@ -23,8 +34,27 @@ const Register: React.FC = () => {
         console.log(res.data);
         navigate(`/section/${res.data.id}`);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  const handleCatchErrs = () => {
+    if (
+      fullname.length < 5
+        ? setFullErr(true)
+        : null && username.length < 5
+        ? setUserErr(true)
+        : null && email.length < 10
+        ? setEmailErr(true)
+        : null && password.length < 5
+        ? setPassErr(true)
+        : null
+    ) {
+    }
+  };
+
+  console.log(fullErr);
 
   return (
     <div className="h-[937px] bg-slate-950 flex items-center z-[999] relative">
@@ -49,27 +79,47 @@ const Register: React.FC = () => {
               </span>
             </div>
             <div>
-              <div className="w-full flex justify-center mb-5 ">
+              {userErr ? (
+                <div className="text-rose-600 text-sm w-full flex justify-center mb-2">
+                  Username Must Conatins At least 5 caracters
+                </div>
+              ) : null}
+              <div className="w-full flex justify-center mb-3">
                 <input
-                  className="p-4 w-[60%] rounded-full bg-inherit border-2 border-white text-rose-400 focus:outline-none font-['poppins'] placeholder:text-gray-500"
+                  className={`p-4 w-[60%] rounded-full bg-inherit border-2 border-white text-rose-400 focus:outline-none font-['poppins'] placeholder:text-gray-500 `}
                   placeholder="Username"
                   onChange={(e: any) => setUsername(e.target.value)}
                 />
               </div>
-              <div className="w-full flex justify-center mb-5 ">
+              {fullErr ? (
+                <div className="text-rose-600 text-sm w-full flex justify-center mb-2">
+                  Fullname Must Conatins At least 5 caracters
+                </div>
+              ) : null}
+              <div className="w-full flex justify-center mb-3">
                 <input
                   className="p-4 w-[60%] rounded-full bg-inherit border-2 border-white text-rose-400 focus:outline-none font-['poppins'] placeholder:text-gray-500"
                   placeholder="Fullname"
                   onChange={(e: any) => setFullname(e.target.value)}
                 />
               </div>
-              <div className="w-full flex justify-center mb-5 ">
+              {emailErr ? (
+                <div className="text-rose-600 text-sm w-full flex justify-center mb-2">
+                  Email Must Conatins At least 5 caracters
+                </div>
+              ) : null}
+              <div className="w-full flex justify-center mb-3">
                 <input
                   className="p-4 w-[60%] rounded-full bg-inherit border-2 border-white text-rose-400 focus:outline-none font-['poppins'] placeholder:text-gray-500"
                   placeholder="Email"
                   onChange={(e: any) => setEmail(e.target.value)}
                 />
               </div>
+              {passErr ? (
+                <div className="text-rose-600 text-sm w-full flex justify-center mb-2">
+                  password Must conatins At least 5 caracters
+                </div>
+              ) : null}
               <div className="w-full flex justify-center">
                 <input
                   className="p-4 w-[60%]  rounded-full bg-inherit border-2 border-white text-rose-400 focus:outline-none font-['poppins'] placeholder:text-gray-500"

@@ -92,50 +92,47 @@ const AlbumSongs: React.FC = () => {
     <>
       <Sidebar />
       <Navbar />
-
       <div className="flex bg-black">
-        <div className="ml-[300px] mt-[130px] w-full">
-          <div className="p-5 flex gap-10">
-            <div className="w-[400px] h-[400px] rounded-full overflow-hidden">
-              <img className="object-cover" src={singleAlbum?.image} />
+        <div className="lg:ml-[300px] mt-[130px] w-full ">
+          <div className="p-5 flex items-center lg:gap-10 gap-5 ">
+            <div>
+              <div className="lg:w-[400px] lg:h-[400px] md:w-[300px] md:h-[300px] w-[100px] h-[100px] overflow-hidden rounded-full">
+                <img className="object-cover" src={singleAlbum?.image} />
+              </div>
             </div>
             <div className="flex items-center gap-5">
-              <span className="text-6xl font-['Russo_One'] text-white">
+              <span className="lg:text-6xl md:text-5xl text-3xl font-['Russo_One'] text-white">
                 {singleAlbum?.name}
               </span>
               <div
                 onClick={handleSelectAlbum}
-                className="bg-rose-600 w-[60px] h-[60px] flex items-center cursor-pointer justify-center rounded-full p-3 hover:bg-rose-900 duration-300"
+                className="bg-rose-600 lg:w-[60px] lg:h-[60px] w-[40px] h-[40px] flex items-center cursor-pointer justify-center rounded-full p-3 hover:bg-rose-900 duration-300"
               >
                 <PlayArrow style={{ fontSize: "35px", color: "white" }} />
               </div>
             </div>
           </div>
 
-          <div className="text-white p-5">
-            <div className="w-full h-[500px] bg-slate-800 bg-opacity-30 rounded-md overflow-scroll mb-16 ">
+          <div className="text-white lg:p-5">
+            <div className="w-full h-[500px] bg-slate-800 bg-opacity-30 rounded-md overflow-scroll lg:mb-16 mb-28 ">
               {singleAlbum?.music.map((item: any) => (
                 <div>
-                  <ul className="flex w-full  hover:bg-opacity-70 hover:bg-rose-900 duration-300 cursor-pointer p-2 ">
-                    <li className="text-white flex items-center gap-2 ml-3 w-[45%]  ">
-                      <div
-                        className="p-2 rounded-full flex justify-center items-center hover:bg-rose-800 duration-200"
-                        onClick={() => HandleSelectSong(item.id)}
-                      >
-                        <PlayArrow />
-                      </div>
-
+                  <ul
+                    onClick={() => HandleSelectSong(item.id)}
+                    className="flex w-full hover:bg-opacity-70 hover:bg-rose-900 duration-300 cursor-pointer lg:p-2 p-2 "
+                  >
+                    <li className="text-white flex items-center gap-2 ml-3 lg:w-[45%] w-[100%]  ">
                       <div className="">
                         <img
-                          className=" object-cover w-[40px] h-[40px] rounded-md "
+                          className="object-cover w-[40px] h-[40px] rounded-md "
                           src={item?.image}
                         />
                       </div>
-                      <span className="font-[poppins] text-sm w-[50%]">
+                      <span className="font-[poppins] lg:text-sm md:text-sm text-[12px] w-[80%]">
                         {item.song.slice(0, 30)}....
                       </span>
                     </li>
-                    <li className="text-white  w-[10%]">
+                    <li className="text-white w-[10%] lg:visible invisible">
                       <div className="h-[50px] flex justify-end items-center">
                         <div className="font-[poppins] text-sm hover:text-green-600 duration-200">
                           {singleAlbum.name}
@@ -144,7 +141,7 @@ const AlbumSongs: React.FC = () => {
                     </li>
                     <li className="text-white w-[45%]">
                       <div className="h-[50px] flex justify-end items-center">
-                        <div className="font-[poppins] text-sm  flex items-center">
+                        <div className="font-[poppins] text-sm flex items-center">
                           {item.like
                             ?.map((it: any) => it.users.id)
                             .includes(CurrentUser.id) ? (
@@ -170,7 +167,7 @@ const AlbumSongs: React.FC = () => {
                             </div>
                           )}
                         </div>
-                        <div className="font-[poppins] w-[50px]  flex justify-center">
+                        <div className="font-[poppins] lg:w-[50px] w-[20px] lg:text-sm text-[8px] flex justify-center">
                           {item?.duration}
                         </div>
                       </div>

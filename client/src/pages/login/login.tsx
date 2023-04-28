@@ -6,11 +6,13 @@ import { loginUser } from "../../redux/usersSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllAlbums } from "../../redux/musicSlice";
 import { getAllMusic } from "../../redux/musicSlice";
+import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState(false);
+  const [err, setErr] = useState(false);
   const dispatch = useDispatch();
   const Navigate = useNavigate();
 
@@ -33,7 +35,10 @@ const Login = () => {
           });
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setErr(true);
+      });
   };
 
   return (
@@ -58,7 +63,7 @@ const Login = () => {
                 LOGIN
               </span>
             </div>
-            <div>
+            <div className="mb-5">
               <div className="w-full flex justify-center mb-5 ">
                 <input
                   className="p-4 w-[60%] rounded-full bg-inherit border-2 border-white text-rose-400 focus:outline-none font-['poppins'] placeholder:text-gray-500"
@@ -75,6 +80,14 @@ const Login = () => {
                 />
               </div>
             </div>
+            {err ? (
+              <div className="w-full flex justify-center items-center gap-2 text-rose-600">
+                <ErrorOutlineOutlined />
+                <span className="text-rose-600 font-['poppins']">
+                  Wrong Username Or Password
+                </span>
+              </div>
+            ) : null}
             <div className="my-10 w-full flex justify-center">
               <button
                 onClick={handleLogin}
@@ -83,7 +96,6 @@ const Login = () => {
                 LOGIN
               </button>
             </div>
-
             <div className="my-10 w-full flex justify-center">
               <Link to={"/register"}>
                 <span className="text-slate-200 font-['poppins'] hover:text-rose-600 duration-300 cursor-pointer">

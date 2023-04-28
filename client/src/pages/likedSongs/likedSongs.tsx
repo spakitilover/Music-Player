@@ -40,49 +40,46 @@ const LikedSongs = () => {
       <Sidebar />
       <Navbar />
       <div className="flex bg-black">
-        <div className="ml-[300px] mt-[130px] w-full">
-          <div className="p-5 flex gap-10">
-            <div className="w-[400px] h-[400px] rounded-md overflow-hidden">
+        <div className="lg:ml-[300px] mt-[130px] w-full">
+          <div className="p-5 flex lg:gap-10 gap-5">
+            <div className="lg:w-[400px] lg:h-[400px] md:w-[300px] md:h-[300px] w-[100px] h-[100px] rounded-md overflow-hidden">
               <img
                 className="object-cover"
                 src="https://preview.redd.it/rnqa7yhv4il71.jpg?width=640&crop=smart&auto=webp&s=819eb2bda1b35c7729065035a16e81824132e2f1"
               />
             </div>
             <div className="flex items-center gap-5">
-              <span className="text-8xl  text-white font-['Russo_One'] ">
+              <span className="lg:text-8xl md:text-6xl text-2xl  text-white font-['Russo_One'] ">
                 Liked Songs
               </span>
               <div
                 onClick={handleCustomAlbum}
-                className="bg-rose-600 w-[60px] h-[60px] flex items-center cursor-pointer justify-center rounded-full p-3 hover:bg-rose-900 duration-300"
+                className="bg-rose-600 lg:w-[60px] lg:h-[60px] w-[40px] h-[40px] flex items-center cursor-pointer justify-center rounded-full p-3 hover:bg-rose-900 duration-300"
               >
                 <PlayArrow style={{ fontSize: "35px", color: "white" }} />
               </div>
             </div>
           </div>
-          <div className="text-white p-5">
+          <div className="text-white lg:p-5">
             <div className="w-full h-[500px] bg-slate-800 bg-opacity-30 rounded-md overflow-scroll mb-24 ">
               {likesSongs.likes.map((item: any) => (
                 <div>
-                  <ul className="flex w-full hover:bg-opacity-70 hover:bg-rose-900 duration-300 cursor-pointer p-2">
-                    <li className="text-white flex items-center gap-2 w-[45%]">
-                      <div
-                        onClick={() => handleSelectSong(item)}
-                        className="hover:bg-rose-800 duration-200 p-2 rounded-full"
-                      >
-                        <PlayArrow />
-                      </div>
-                      <div className="">
+                  <ul
+                    onClick={() => handleSelectSong(item)}
+                    className="flex w-full hover:bg-opacity-70 hover:bg-rose-900 duration-300 cursor-pointer p-2"
+                  >
+                    <li className="text-white flex items-center gap-1 w-[100%]">
+                      <div className="w-[50px]">
                         <img
-                          className=" object-cover w-[40px] h-[40px] rounded-md flex justify-center items-center"
+                          className="object-cover w-[40px] h-[40px] rounded-sm"
                           src={item?.music?.image}
                         />
                       </div>
-                      <span className="font-[poppins] text-sm w-[50%]">
-                        {item?.music?.song.slice(0, 30)}....
+                      <span className="font-[poppins] lg:text-sm md:text-sm text-[10px] w-[100%]">
+                        {item?.music?.song.slice(0, 25)}....
                       </span>
                     </li>
-                    <li className="text-white  w-[10%]">
+                    <li className="text-white  w-[10%] lg:visible invisible">
                       <div className="h-[50px] flex justify-end items-center">
                         <div className="font-[poppins] text-sm">
                           {" "}
@@ -90,14 +87,14 @@ const LikedSongs = () => {
                         </div>
                       </div>
                     </li>
-                    <li className="text-white w-[45%] mr-[5px]">
+                    <li className="text-white w-[45%] lg:mr-[5px]">
                       <div className="h-[50px] flex justify-end items-center">
                         <div className="font-[poppins] text-sm w-[30px] flex items-center">
                           <div className="" onClick={() => removeLike(item.id)}>
                             <Favorite className="text-rose-600" />
                           </div>
                         </div>
-                        <div className="font-[poppins] w-[50px] flex justify-center">
+                        <div className="font-[poppins] w-[50px] lg:text-sm text-[10px] flex justify-center">
                           {item?.music?.duration}
                         </div>
                       </div>

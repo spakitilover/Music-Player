@@ -96,7 +96,16 @@ const Playlist = () => {
 
   return (
     <>
-      <div className="border-t-[1px] bg-black flex items-center h-[100px] w-full fixed bottom-0 z-40">
+      <div className="border-t-[1px] bg-black flex items-center  h-[100px] w-full fixed bottom-0 z-40">
+        <div>
+          <img
+            src={
+              singleAlbum[0]?.music[curr]?.image ||
+              singleAlbum[curr]?.music.image
+            }
+            className="absolute w-full h-full left-0 top-0 object-cover opacity-25 "
+          />
+        </div>
         <audio
           ref={audioElm}
           src={`${process.env.REACT_APP_LOCALHOST}music/${
@@ -117,27 +126,27 @@ const Playlist = () => {
             </div>
           </div>
         ) : (
-          <div className="text-white flex items-center justify-between w-full p-10">
-            <div className="flex justify-start items-center  w-[30%]">
-              <div className="">
+          <div className="text-white flex items-center justify-between relative w-full lg:p-5">
+            <div className="flex justify-start items-center lg:w-[30%] w-[0%]">
+              <div className=" lg:relative md:absolute absolute lg:visible invisible">
                 <img
-                  className="w-[70px] h-[70px] rounded-md  object-cover"
+                  className="lg:w-[70px] lg:h-[70px]  rounded-full  object-cover"
                   src={
                     singleAlbum[0]?.music[curr]?.image ||
                     singleAlbum[curr]?.music.image
                   }
                 />
               </div>
-              <div className="p-5">
+              <div className="p-5 lg:visible md:invisible invisible">
                 <div>
-                  <span className="font-[poppins]">
-                    {singleAlbum[0]?.music[curr]?.song?.slice(0, 30) ||
-                      singleAlbum[curr]?.music.song.slice(0, 30)}
+                  <span className="font-[poppins] lg:text-[14px] text-[10px]">
+                    {singleAlbum[0]?.music[curr]?.song?.slice(0, 25) ||
+                      singleAlbum[curr]?.music.song.slice(0, 25)}
                     ....
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 font-[poppins]">
+                  <span className="text-slate-500 font-[poppins] lg:text-[14px] text-[10px]">
                     {singleAlbum[0]?.name ||
                       singleAlbum[curr]?.music.albums.name}
                   </span>
@@ -145,19 +154,19 @@ const Playlist = () => {
               </div>
             </div>
 
-            <div className="w-[40%] flex justify-center">
-              <div>
-                <div className="flex justify-center gap-5">
+            <div className="lg:w-[40%] w-[100%] flex justify-center lg:p-0 p-5">
+              <div className="w-full">
+                <div className="flex justify-center lg:gap-5 md:gap-3 gap-1">
                   {singleAlbum[curr]?.users ? (
                     <div
-                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full"
+                      className="cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  lg:p-1 rounded-full"
                       onClick={CustomPrev}
                     >
                       <SkipPrevious style={{ fontSize: "40px" }} />
                     </div>
                   ) : (
                     <div
-                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full"
+                      className="cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  lg:p-1 rounded-full"
                       onClick={PrevSong}
                     >
                       <SkipPrevious style={{ fontSize: "40px" }} />
@@ -165,7 +174,7 @@ const Playlist = () => {
                   )}
 
                   {isPlaying ? (
-                    <div className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  p-1 rounded-full">
+                    <div className="cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 hover:text-rose-500  lg:p-1 rounded-full">
                       <Pause
                         style={{ fontSize: "40px" }}
                         onClick={handlePlay}
@@ -173,7 +182,7 @@ const Playlist = () => {
                     </div>
                   ) : (
                     <div
-                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 p-1 hover:text-rose-500   rounded-full "
+                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 lg:p-1 hover:text-rose-500 rounded-full "
                       onClick={handlePlay}
                     >
                       <PlayArrow style={{ fontSize: "40px" }} />
@@ -182,22 +191,22 @@ const Playlist = () => {
 
                   {singleAlbum[curr]?.users ? (
                     <div
-                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 p-1 hover:text-rose-500  rounded-full"
+                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 lg:p-1 hover:text-rose-500  rounded-full"
                       onClick={CustomNext}
                     >
                       <SkipNext style={{ fontSize: "40px" }} />
                     </div>
                   ) : (
                     <div
-                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 p-1 hover:text-rose-500  rounded-full"
+                      className=" cursor-pointer bg-slate-900 hover:bg-opacity-70 duration-300 lg:p-1 hover:text-rose-500  rounded-full"
                       onClick={NextSong}
                     >
                       <SkipNext style={{ fontSize: "40px" }} />
                     </div>
                   )}
                 </div>
-                <div className="w-[30vw] flex items-center gap-5">
-                  <div className="text-sm font-[poppins] text-slate-500">
+                <div className="lg:w-[40vw] w-full flex items-center gap-5">
+                  <div className="lg:text-sm text-[10px] font-[poppins]  text-white">
                     {liveDuration}
                   </div>
                   <Slider
@@ -208,16 +217,20 @@ const Playlist = () => {
                     onClick={handleWidth}
                     ref={Click}
                   />
-                  <div className="text-sm font-[poppins] text-slate-500">
+                  <div className="lg:text-sm text-[10px] font-[poppins] text-white">
                     {total}
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className=" gap-3 w-[30%] flex justify-end">
-              <div className="w-[130px] flex gap-3 items-center">
-                {volume < 0.01 ? <VolumeOff /> : <VolumeUp />}
+            <div className="gap-3 lg:w-[30%]   w-[0%] flex justify-end lg:visible invisible">
+              <div className="lg:w-[130px] w-[0%] flex gap-3 items-center">
+                {volume < 0.01 ? (
+                  <VolumeOff style={{ fontSize: "15px" }} />
+                ) : (
+                  <VolumeUp style={{ fontSize: "15px" }} />
+                )}
                 <Slider
                   size="small"
                   defaultValue={volume}

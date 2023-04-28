@@ -33,14 +33,14 @@ const Intro = () => {
   }, []);
 
   return (
-    <div className="p-5 w-full ml-[300px] mt-[120px]">
+    <div className="lg:p-5 w-full lg:ml-[300px]  mt-[120px]">
       <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">
         Albums
       </div>
-      <div className="flex flex-wrap gap-10  ">
+      <div className="lg:flex lg:justify-start md:flex md:justify-center flex justify-center flex-wrap lg:gap-10 gap-5 ">
         {albums.map((item) => (
           <div>
-            <div className="w-[200px] h-[200px] overflow-hidden rounded-md border-b-2 border-rose-500 ">
+            <div className="lg:w-[200px] lg:h-[200px] md:w-[180px] md:h-[180px] w-[160px] h-[160px] overflow-hidden rounded-md border-b-2 border-rose-500 ">
               <Link to={`/albumsSongs/${item.id}`}>
                 <img
                   className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300 "
@@ -52,42 +52,42 @@ const Intro = () => {
           </div>
         ))}
       </div>
-      <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">Songs</div>
-      <div className="flex">
-        <div className="w-[70%] h-[300px] overflow-auto p-3">
+      <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">
+        My Playlist
+      </div>
+      <div className="lg:flex">
+        <div className="lg:w-[70%] lg:w-[100%] h-[300px] overflow-auto p-3">
           {Musics.map((item: any) => (
             <div>
-              <ul className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-2 ">
-                <li className="text-white flex items-center gap-2  w-[45%]  ">
-                  <div className="p-2 hover:bg-rose-800 duration-200 rounded-full">
-                    <PlayArrow />
-                  </div>
-
+              <ul className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-1 ">
+                <li className="text-white flex items-center lg:gap-2 gap-1 lg:w-[45%] w-[80%]">
                   <div className="">
                     <img
-                      className="w-[40px] h-[40px] rounded-md  object-cover"
+                      className="lg:w-[40px] lg:h-[40px] w-[30px] h-[30px] rounded-md object-cover"
                       src={item.image}
                     />
                   </div>
-                  <span className="font-[poppins] text-sm w-[50%]">
+                  <span className="font-[poppins] lg:text-sm text-[8px] w-[50%]">
                     {item.song.slice(0, 18)}...
                   </span>
                 </li>
-                <li className="text-white  w-[10%]">
+                <li className="text-white  lg:w-[10%] w-[30%] lg:visible invisible">
                   <div className="h-[50px] flex justify-end items-center">
-                    <div className="font-[poppins] text-sm">
+                    <div className="font-[poppins] lg:text-sm text-[8px]">
                       {" "}
                       {item.albums.name}
                     </div>
                   </div>
                 </li>
-                <li className="text-white w-[45%] mr-2">
+                <li className="text-white lg:w-[45%] w-[40%] lg:mr-2 mr-0">
                   <div className="h-[50px] flex justify-end items-center">
                     <div className="font-[poppins] text-sm gap-5 flex items-center">
                       <div className="text-slate-500 hover:text-rose-600 duration-300 ">
                         <Favorite className="" />
                       </div>
-                      <div className="font-[poppins]">{item?.duration}</div>
+                      <div className="font-[poppins] lg:text-sm text-[10px]">
+                        {item?.duration}
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -97,30 +97,33 @@ const Intro = () => {
           ))}
         </div>
 
-        <div className="w-[30%] p-5">
-          <div className="text-3xl font-['Russo_One'] text-rose-600 p-5">
-            Most Likes Song!
+        <div className="lg:w-[30%] w-full mb-24">
+          <div className="lg:text-3xl font-['Russo_One'] text-rose-600 lg:p-5 p-1 flex justify-center my-5">
+            Most Liked Song!
           </div>
-          <div className="text-white gap-5  p-5">
-            <div className="flex gap-5">
+          <div className="text-white gap-5 lg:p-5 p-1 flex justify-center">
+            <div className="lg:flex gap-5">
               <Link to={`/albumsSongs/${MostLikedSong?.albums?.id}`}>
-                <img
-                  className="object-cover cursor-pointer hover:opacity-80 hover:scale-105 duration-300 rounded-md w-[130px] h-[130px]"
-                  src={MostLikedSong?.image}
-                />
+                <div className="flex justify-center">
+                  <img
+                    className="object-cover cursor-pointe hover:opacity-80 hover:scale-105 duration-300 rounded-md lg:w-[130px] lg:h-[130px] w-[100px] h-[100px]"
+                    src={MostLikedSong?.image}
+                  />
+                </div>
               </Link>
-
-              <div>
-                <div className="font-['poppins'] text-md text-slate-400 p-1">
+              <div className="text-center">
+                <div className="font-['poppins'] lg:text-md text-sm text-slate-400 p-1">
                   {MostLikedSong?.albums?.name}
                 </div>
-                <div className="font-['poppins'] text-md p-1">
+                <div className="font-['poppins'] text-md text-sm p-1">
                   {MostLikedSong?.song.slice(0, 30)}
                 </div>
-                <div className="text-rose-600 p-1 gap-1 flex items-center  ">
-                  <div>{MostLikedSong?.like?.length}</div>
+                <div className="text-rose-600 p-1 gap-1 lg:flex lg:items-center  flex justify-center  ">
                   <div>
                     <Favorite />
+                  </div>
+                  <div className="font-['Russo_One']">
+                    {MostLikedSong?.like?.length}
                   </div>
                 </div>
               </div>
