@@ -34,15 +34,19 @@ const Navbar = () => {
     <div className="w-full top-0 fixed bg-black z-50 lg:border-none border-b-2">
       <div className="flex items-center">
         <div className="w-full lg:p-5 p-3 flex items-center">
-          <div className="flex items-center gap-2 lg:w-full w-full text-rose-600">
-            <span className="lg:text-4xl text-xl  font-['Russo_One']">
-              Kabaki Music
-            </span>
+          <div className="flex items-center gap-2 lg:w-full text-rose-600">
+            <Link to="/home">
+              <div className="lg:text-4xl text-xl lg:w-auto w-[200px] font-['Russo_One']">
+                Kabaki Music
+              </div>
+            </Link>
+
             <img
               className="w-[40px] h-[40px] lg:visible invisible"
               src="https://cdn-icons-png.flaticon.com/512/882/882634.png"
             />
           </div>
+
           <div className="gap-5 flex items-center lg:visible invisible">
             <SearchModel />
             <span

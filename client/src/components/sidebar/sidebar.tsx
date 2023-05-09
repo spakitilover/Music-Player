@@ -7,7 +7,6 @@ import CottageOutlined from "@mui/icons-material/CottageOutlined";
 import StarBorderOutlined from "@mui/icons-material/StarBorderOutlined";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { current } from "@reduxjs/toolkit";
 
 const Sidebar = () => {
   const CurrentUser = useSelector((state: any) => state.users.CurrentUser);
@@ -25,7 +24,7 @@ const Sidebar = () => {
             </div>
           ) : (
             <img
-              className="lg:w-[80px] lg:h-[80px] object-cover rounded-full"
+              className="lg:w-[80px] lg:h-[80px] object-cover rounded-full shadow-md shadow-gray-500"
               src={`${process.env.REACT_APP_LOCALHOST}users/${CurrentUser?.image}`}
             />
           )}

@@ -69,7 +69,7 @@ const SearchModel = () => {
                 filterSongs.map((i) => (
                   <div className="flex items-center rounded-md gap-3 hover:bg-rose-600 duration-300 p-3">
                     <img
-                      className="w-[60px] h-[60px] rounded-md object-cover"
+                      className="lg:w-[60px] lg:h-[60px] rounded-md object-cover"
                       src={i?.image}
                     />
                     <span className="text-white font-['poppins']">

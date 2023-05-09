@@ -32,10 +32,10 @@ const Albums = () => {
       <Navbar />
       <div className="flex bg-black">
         <div className="lg:ml-[300px] mt-[130px]">
-          <div className="text-3xl font-['Russo_One'] lg:flex lg:justify-start  text-rose-600 p-5 ">
+          <div className="text-3xl font-['Russo_One'] lg:flex lg:justify-start text-rose-600 p-5 ">
             English Albums .
           </div>
-          <div className="lg:flex lg:justify-start flex justify-center w-full flex-wrap gap-10 lg:p-5">
+          <div className="lg:flex lg:justify-start flex  w-full flex-wrap gap-10 lg:p-5 p-5">
             {AlbumsEG.map((item) => (
               <div>
                 <div className="lg:w-[200px] lg:h-[200px] md:w-[180px] md:h-[180px] w-[140px] h-[140px] overflow-hidden rounded-md  ">
@@ -46,7 +46,7 @@ const Albums = () => {
                     />
                   </Link>
                 </div>
-                <div className="text-white lg:text-2xl text-[12px] p-3 font-[poppins]">
+                <div className="text-white  p-3 font-[poppins]">
                   {item.name}
                 </div>
               </div>

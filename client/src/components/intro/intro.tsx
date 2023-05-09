@@ -59,7 +59,7 @@ const Intro = () => {
         <div className="lg:w-[70%] lg:w-[100%] h-[300px] overflow-auto p-3">
           {Musics.map((item: any) => (
             <div>
-              <ul className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-1 ">
+              <ul className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-2 ">
                 <li className="text-white flex items-center lg:gap-2 gap-1 lg:w-[45%] w-[80%]">
                   <div className="">
                     <img
@@ -92,7 +92,6 @@ const Intro = () => {
                   </div>
                 </li>
               </ul>
-              <hr className="border-rose-950 " />
             </div>
           ))}
         </div>
@@ -101,10 +100,10 @@ const Intro = () => {
           <div className="lg:text-3xl font-['Russo_One'] text-rose-600 lg:p-5 p-1 flex justify-center my-5">
             Most Liked Song!
           </div>
-          <div className="text-white gap-5 lg:p-5 p-1 flex justify-center">
+          <div className="text-white gap-3 p-1 flex justify-center">
             <div className="lg:flex gap-5">
               <Link to={`/albumsSongs/${MostLikedSong?.albums?.id}`}>
-                <div className="flex justify-center">
+                <div className="flex justify-center lg:w-[130px]">
                   <img
                     className="object-cover cursor-pointe hover:opacity-80 hover:scale-105 duration-300 rounded-md lg:w-[130px] lg:h-[130px] w-[100px] h-[100px]"
                     src={MostLikedSong?.image}

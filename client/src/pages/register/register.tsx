@@ -17,12 +17,6 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    if (fullname.length < 5) {
-      setFullErr(true);
-    } else {
-      return null;
-    }
-
     axios
       .post(`${process.env.REACT_APP_LOCALHOST}users/create`, {
         fullname,

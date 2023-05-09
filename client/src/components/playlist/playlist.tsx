@@ -96,14 +96,14 @@ const Playlist = () => {
 
   return (
     <>
-      <div className="border-t-[1px] bg-black flex items-center  h-[100px] w-full fixed bottom-0 z-40">
+      <div className="bg-black flex items-center h-[100px] w-full fixed bottom-0 z-40">
         <div>
           <img
             src={
               singleAlbum[0]?.music[curr]?.image ||
               singleAlbum[curr]?.music.image
             }
-            className="absolute w-full h-full left-0 top-0 object-cover opacity-25 "
+            className="absolute w-full h-full left-0 top-0 object-cover opacity-50 lg:blur-[8px]  "
           />
         </div>
         <audio
@@ -116,14 +116,10 @@ const Playlist = () => {
           onEnded={() => (singleAlbum[curr]?.users ? CustomNext() : NextSong())}
         />
         {singleAlbum.length < 1 ? (
-          <div className="text-white flex items-center justify-center w-full p-10 gap-3">
+          <div className="text-white flex items-center justify-center w-full p-10 gap-3 text-center">
             <span className="font-['Press_Start_2P']">
               Start With Selecting Your Album ,Songs
             </span>
-
-            <div className="w-[35px] h-[35px] rounded-full bg-gray-800 flex justify-center items-center">
-              <MusicNote />
-            </div>
           </div>
         ) : (
           <div className="text-white flex items-center justify-between relative w-full lg:p-5">
@@ -227,9 +223,9 @@ const Playlist = () => {
             <div className="gap-3 lg:w-[30%]   w-[0%] flex justify-end lg:visible invisible">
               <div className="lg:w-[130px] w-[0%] flex gap-3 items-center">
                 {volume < 0.01 ? (
-                  <VolumeOff style={{ fontSize: "15px" }} />
+                  <VolumeOff style={{ fontSize: "20px" }} />
                 ) : (
-                  <VolumeUp style={{ fontSize: "15px" }} />
+                  <VolumeUp style={{ fontSize: "20px" }} />
                 )}
                 <Slider
                   size="small"

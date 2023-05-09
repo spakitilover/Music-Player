@@ -69,37 +69,36 @@ const UploadModal = () => {
             </div>
             <hr className="border-white mb-5" />
             <div className="p-5 flex justify-center">
-              {CurrentUser.image === null ? (
-                <img
-                  className="w-[250px] h-[250px] bg-slate-700 rounded-full object-cover flex items-center justify-center"
-                  src="https://img.freepik.com/free-icon/user_318-552176.jpg"
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+              >
+                <input
+                  hidden
+                  type="file"
+                  onChange={(e: any) => setImage(e.target.files[0])}
                 />
-              ) : (
-                <img
-                  className="w-[250px] h-[250px] rounded-full object-cover flex items-center justify-center"
-                  src={`${process.env.REACT_APP_LOCALHOST}users/${CurrentUser?.image}`}
-                />
-              )}
+                {CurrentUser.image === null ? (
+                  <img
+                    className="w-[250px] h-[250px] bg-slate-700 rounded-full object-cover flex items-center justify-center"
+                    src="https://img.freepik.com/free-icon/user_318-552176.jpg"
+                  />
+                ) : (
+                  <img
+                    className="w-[250px] h-[250px] rounded-full object-cover flex items-center justify-center"
+                    src={`${process.env.REACT_APP_LOCALHOST}users/${CurrentUser?.image}`}
+                  />
+                )}
+              </IconButton>
             </div>
             <div className="p-5 mb-5">
-              <div className="text-slate-500 font-[poppins]">
-                Choose File
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                >
-                  <input
-                    hidden
-                    type="file"
-                    onChange={(e: any) => setImage(e.target.files[0])}
-                  />
-                  <PhotoCamera />
-                </IconButton>
-              </div>
               <div className="font-[poppins] text-white">{image?.name}</div>
             </div>
-            <button className="p-5 bg-rose-600 flex justify-center w-full hover:bg-rose-900 duration-300">
+            <button
+              onClick={handleUpdateImage}
+              className="p-5 bg-rose-600 flex justify-center w-full hover:bg-rose-900 duration-300"
+            >
               <span className="font-[poppins]">Upload</span>
             </button>
           </div>

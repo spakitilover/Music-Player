@@ -100,7 +100,6 @@ const LikedSongs = () => {
                       </div>
                     </li>
                   </ul>
-                  <hr className="border-rose-900" />
                 </div>
               ))}
             </div>
