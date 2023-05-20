@@ -144,7 +144,8 @@ const Playlist = () => {
                 <div>
                   <span className="text-slate-500 font-[poppins] lg:text-[14px] text-[10px]">
                     {singleAlbum[0]?.name ||
-                      singleAlbum[curr]?.music.albums.name}
+                      singleAlbum[curr]?.music?.albums?.name ||
+                      singleAlbum[0]?.music[curr]?.albums?.name}
                   </span>
                 </div>
               </div>

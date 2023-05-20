@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Music } from "../../interface/singleAlbum";
 import Favorite from "@mui/icons-material/Favorite";
+import { selectAlbum, selectIntroSongs } from "../../redux/musicSlice";
 
 const Intro = () => {
   const [albums, setAlbums] = useState<Albums[]>([]);
@@ -17,6 +18,7 @@ const Intro = () => {
   const MostLikedSong = Musics.find(
     (i: any) => i.like.length === MaxSongLikesValue
   );
+  const ms = useSelector((state: any) => state.music.Music);
 
   interface Albums {
     id: number;
@@ -31,6 +33,10 @@ const Intro = () => {
       .then((res) => setAlbums(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  const handleIntroSelecet = () => {
+    dispatch(selectIntroSongs({ music: ms }));
+  };
 
   return (
     <div className="lg:p-5 w-full lg:ml-[300px]  mt-[120px]">
@@ -59,7 +65,10 @@ const Intro = () => {
         <div className="lg:w-[70%] lg:w-[100%] h-[300px] overflow-auto p-3">
           {Musics.map((item: any) => (
             <div>
-              <ul className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-2 ">
+              <ul
+                className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-2"
+                onClick={handleIntroSelecet}
+              >
                 <li className="text-white flex items-center lg:gap-2 gap-1 lg:w-[45%] w-[80%]">
                   <div className="">
                     <img
