@@ -7,7 +7,12 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Music } from "../../interface/singleAlbum";
 import Favorite from "@mui/icons-material/Favorite";
-import { selectAlbum, selectIntroSongs } from "../../redux/musicSlice";
+import {
+  selectAlbum,
+  selectIntroSongs,
+  selectSingleIntroSong,
+} from "../../redux/musicSlice";
+import { addLike } from "../../redux/usersSlice";
 
 const Intro = () => {
   const [albums, setAlbums] = useState<Albums[]>([]);
@@ -19,6 +24,7 @@ const Intro = () => {
     (i: any) => i.like.length === MaxSongLikesValue
   );
   const ms = useSelector((state: any) => state.music.Music);
+  const CurrentUser = useSelector((state: any) => state.users.CurrentUser);
 
   interface Albums {
     id: number;
@@ -34,8 +40,21 @@ const Intro = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleIntroSelecet = () => {
-    dispatch(selectIntroSongs({ music: ms }));
+  const handleIntroSelecet = (item: any) => {
+    dispatch(selectSingleIntroSong({ music: ms, songId: item.id }));
+  };
+
+  const handleLike = (id: any) => {
+    axios
+      .post(
+        `${process.env.REACT_APP_LOCALHOST}likes/addlike/${CurrentUser.id}`,
+        {
+          musicId: id,
+        }
+      )
+      .then((res) => {
+        dispatch(addLike(res.data));
+      });
   };
 
   return (
@@ -67,7 +86,7 @@ const Intro = () => {
             <div>
               <ul
                 className="flex w-full hover:bg-opacity-30 hover:bg-rose-800 duration-300 cursor-pointer p-2"
-                onClick={handleIntroSelecet}
+                onClick={() => handleIntroSelecet(item)}
               >
                 <li className="text-white flex items-center lg:gap-2 gap-1 lg:w-[45%] w-[80%]">
                   <div className="">
@@ -91,9 +110,13 @@ const Intro = () => {
                 <li className="text-white lg:w-[45%] w-[40%] lg:mr-2 mr-0">
                   <div className="h-[50px] flex justify-end items-center">
                     <div className="font-[poppins] text-sm gap-5 flex items-center">
-                      <div className="text-slate-500 hover:text-rose-600 duration-300 ">
+                      <div
+                        className="text-slate-500 hover:text-rose-600 duration-300"
+                        onClick={() => handleLike(item.id)}
+                      >
                         <Favorite className="" />
                       </div>
+
                       <div className="font-[poppins] lg:text-sm text-[10px]">
                         {item?.duration}
                       </div>

@@ -48,8 +48,6 @@ const Register: React.FC = () => {
     }
   };
 
-  console.log(fullErr);
-
   return (
     <div className="h-[937px] bg-slate-950 flex items-center z-[999] relative">
       <div className="w-full">

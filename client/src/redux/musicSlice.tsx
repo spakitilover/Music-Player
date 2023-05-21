@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Albums, Music, singleAlbum } from "../interface/singleAlbum";
 
 export const MusicSlice = createSlice({
   name: "music",
@@ -92,6 +91,15 @@ export const MusicSlice = createSlice({
       state.singleAlbum.push(action.payload);
     },
 
+    selectSingleIntroSong: (state: any, action) => {
+      state.singleAlbum = [];
+      state.singleAlbum.push(action.payload);
+      const FindSongIndex = state.Music.findIndex(
+        (i: any) => i.id === action.payload.songId
+      );
+      state.curr = FindSongIndex;
+    },
+
     addingLike: (state: any, action) => {
       state.Album.find((it: any) => it.id === action.payload.music.albums.id)
         .music.find((item: any) => item.id === action.payload.music.id)
@@ -138,6 +146,7 @@ export const {
   customPrev,
   selectCustom,
   selectIntroSongs,
+  selectSingleIntroSong,
 } = MusicSlice.actions;
 
 export default MusicSlice.reducer;
