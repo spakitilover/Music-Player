@@ -6,7 +6,12 @@ import PlayArrow from "@mui/icons-material/PlayArrow";
 import Favorite from "@mui/icons-material/Favorite";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addingLike, selectAlbum, selectSong } from "../../redux/musicSlice";
+import {
+  addIntroLike,
+  addingLike,
+  selectAlbum,
+  selectSong,
+} from "../../redux/musicSlice";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { addLike } from "../../redux/usersSlice";
@@ -75,6 +80,7 @@ const AlbumSongs: React.FC = () => {
       .then((res) => {
         dispatch(addLike(res.data));
         dispatch(addingLike(res.data));
+        dispatch(addIntroLike({ songId: id, ...res.data }));
       });
   };
 

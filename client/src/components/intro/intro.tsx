@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { Music } from "../../interface/singleAlbum";
 import Favorite from "@mui/icons-material/Favorite";
 import {
+  addIntroLike,
+  removeIntroLike,
   selectAlbum,
   selectIntroSongs,
   selectSingleIntroSong,
@@ -54,7 +56,17 @@ const Intro = () => {
       )
       .then((res) => {
         dispatch(addLike(res.data));
+        dispatch(addIntroLike({ songId: id, ...res.data }));
       });
+  };
+
+  const handleRemoveIntroLike = (item: any) => {
+    axios
+      .delete(`${process.env.REACT_APP_LOCALHOST}likes/unlike/${item.id}`)
+      .then((res) => {
+        dispatch(removeIntroLike({ id: item.id, ...res.data }));
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -110,12 +122,28 @@ const Intro = () => {
                 <li className="text-white lg:w-[45%] w-[40%] lg:mr-2 mr-0">
                   <div className="h-[50px] flex justify-end items-center">
                     <div className="font-[poppins] text-sm gap-5 flex items-center">
-                      <div
-                        className="text-slate-500 hover:text-rose-600 duration-300"
-                        onClick={() => handleLike(item.id)}
-                      >
-                        <Favorite className="" />
-                      </div>
+                      {item.like
+                        ?.map((i: any) => i.users.id)
+                        .includes(CurrentUser.id) ? (
+                        <div
+                          onClick={() =>
+                            handleRemoveIntroLike(
+                              item.like.find(
+                                (itm: any) => itm.users.id === CurrentUser.id
+                              )
+                            )
+                          }
+                        >
+                          It works
+                        </div>
+                      ) : (
+                        <div
+                          className="text-slate-500 hover:text-rose-600 duration-300"
+                          onClick={() => handleLike(item.id)}
+                        >
+                          <Favorite className="" />
+                        </div>
+                      )}
 
                       <div className="font-[poppins] lg:text-sm text-[10px]">
                         {item?.duration}

@@ -106,6 +106,23 @@ export const MusicSlice = createSlice({
         .like.push(action.payload);
     },
 
+    addIntroLike: (state: any, action) => {
+      state.Music.find((i: any) => i.id === action.payload.songId).like.push(
+        action.payload
+      );
+    },
+
+    removeIntroLike: (state: any, action) => {
+      state.Music.find(
+        (i: any) => i.id === action.payload.music.id
+      ).like.splice(
+        state.Music.find(
+          (it: any) => it.id === action.payload.music.id
+        ).like.findIndex((itm: any) => itm.id === action.payload.id),
+        1
+      );
+    },
+
     removeLikes: (state: any, action) => {
       const albums = state.Album.find(
         (item: any) => item.id === action.payload.music.albums.id
@@ -147,6 +164,8 @@ export const {
   selectCustom,
   selectIntroSongs,
   selectSingleIntroSong,
+  addIntroLike,
+  removeIntroLike,
 } = MusicSlice.actions;
 
 export default MusicSlice.reducer;
