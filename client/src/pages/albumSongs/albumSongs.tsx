@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import {
   addIntroLike,
   addingLike,
+  removeIntroLike,
   selectAlbum,
   selectSong,
 } from "../../redux/musicSlice";
@@ -90,6 +91,7 @@ const AlbumSongs: React.FC = () => {
       .then((res) => {
         dispatch(removeUserLike({ id: id.id }));
         dispatch(removeLikes({ id: id.id, ...res.data }));
+        dispatch(removeIntroLike({ id: id.id, ...res.data }));
       })
       .catch((err) => console.log(err));
   };

@@ -9,12 +9,14 @@ import { Music } from "../../interface/singleAlbum";
 import Favorite from "@mui/icons-material/Favorite";
 import {
   addIntroLike,
+  addingLike,
   removeIntroLike,
+  removeLikes,
   selectAlbum,
   selectIntroSongs,
   selectSingleIntroSong,
 } from "../../redux/musicSlice";
-import { addLike } from "../../redux/usersSlice";
+import { addLike, removeUserLike } from "../../redux/usersSlice";
 
 const Intro = () => {
   const [albums, setAlbums] = useState<Albums[]>([]);
@@ -57,6 +59,7 @@ const Intro = () => {
       .then((res) => {
         dispatch(addLike(res.data));
         dispatch(addIntroLike({ songId: id, ...res.data }));
+        dispatch(addingLike(res.data));
       });
   };
 
@@ -65,6 +68,8 @@ const Intro = () => {
       .delete(`${process.env.REACT_APP_LOCALHOST}likes/unlike/${item.id}`)
       .then((res) => {
         dispatch(removeIntroLike({ id: item.id, ...res.data }));
+        dispatch(removeUserLike({ id: item }));
+        dispatch(removeLikes({ id: item.id, ...res.data }));
       })
       .catch((err) => console.log(err));
   };
@@ -126,6 +131,7 @@ const Intro = () => {
                         ?.map((i: any) => i.users.id)
                         .includes(CurrentUser.id) ? (
                         <div
+                          className=""
                           onClick={() =>
                             handleRemoveIntroLike(
                               item.like.find(
@@ -134,7 +140,7 @@ const Intro = () => {
                             )
                           }
                         >
-                          It works
+                          <Favorite className="text-rose-600" />
                         </div>
                       ) : (
                         <div

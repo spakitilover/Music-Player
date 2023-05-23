@@ -8,7 +8,11 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { removeUserLike } from "../../redux/usersSlice";
-import { removeLikes, selectCustom } from "../../redux/musicSlice";
+import {
+  removeIntroLike,
+  removeLikes,
+  selectCustom,
+} from "../../redux/musicSlice";
 import { selectAlbum } from "../../redux/musicSlice";
 import { customAlbums } from "../../redux/musicSlice";
 
@@ -23,6 +27,7 @@ const LikedSongs = () => {
       .then((res) => {
         dispatch(removeUserLike({ id: id }));
         dispatch(removeLikes({ id: id.id, ...res.data }));
+        dispatch(removeIntroLike({ id: id.id, ...res.data }));
       })
       .catch((err) => console.log(err));
   };
