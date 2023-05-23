@@ -89,7 +89,7 @@ const AlbumSongs: React.FC = () => {
     axios
       .delete(`${process.env.REACT_APP_LOCALHOST}likes/unlike/${id.id}`)
       .then((res) => {
-        dispatch(removeUserLike({ id: id.id }));
+        dispatch(removeUserLike({ id: id }));
         dispatch(removeLikes({ id: id.id, ...res.data }));
         dispatch(removeIntroLike({ id: id.id, ...res.data }));
       })

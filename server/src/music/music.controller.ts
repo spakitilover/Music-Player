@@ -57,7 +57,7 @@ export class MusicController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body('image') image: string) {
-    return this.musicService.update(id, image);
+  update(@Param('id') id: number, @Body('duration') duration: string) {
+    return this.musicService.update(id, duration);
   }
 }

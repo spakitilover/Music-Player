@@ -38,12 +38,12 @@ export class MusicService {
     return music;
   }
 
-  async update(id: number, image: string) {
+  async update(id: number, duration: string) {
     const music = await this.musicRepo.findOne({
       where: { id: id },
     });
 
-    return await this.musicRepo.save({ ...music, image });
+    return await this.musicRepo.save({ ...music, duration: duration });
   }
 
   async create(id: number, file: string, image: string, duration: string) {
